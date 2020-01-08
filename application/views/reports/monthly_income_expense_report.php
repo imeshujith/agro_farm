@@ -73,7 +73,7 @@
 										<?php } } ?>
 									<tr class="bg-gray-active">
 										<td colspan="4" class="text-right"><strong>Total Income</strong></td>
-										<td class="text-right"><strong></strong></td>
+										<td class="text-right"><strong>Rs.<?php if($invoice_msum) { echo number_format($invoice_msum[0]->total, 2); } ?></strong></td>
 									</tr>
 									</tbody>
 								</table>
@@ -99,7 +99,7 @@
 										<?php } } ?>
 									<tr class="bg-gray-active">
 										<td colspan="4" class="text-right"><strong>Total Expenses</strong></td>
-										<td class="text-right"><strong></strong></td>
+										<td class="text-right"><strong>Rs.<?php if($po_msum) { echo number_format($po_msum[0]->total, 2); } ?></strong></td>
 									</tr>
 									</thead>
 								</table>

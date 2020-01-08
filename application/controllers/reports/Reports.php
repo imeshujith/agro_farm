@@ -102,58 +102,56 @@ class Reports extends CI_Controller {
 		$this->load->view("footer");
 	}
 
-	public function customer_report() {
-		$this->load->view('header');
-		$this->load->view('reports/customer_report');
-		$this->load->view("footer");
-	}
+    public function yearly_income_expense_report() {
+        $year = $this->input->post('year');
 
-	public function yearly_income_expense_report() {
-		$year = $this->input->post('year');
+        $data = array(
+            'invoices' => null,
+            'pos' => null,
+            'title' => null,
+            'invoice_ysum' => null,
+            'po_ysum' => null,
+        );
 
-		$data = array(
-			'invoices' => null,
-			'pos' => null,
-			'title' => null,
-			'sum' => null,
-		);
+        $company = $this->CompanyModel->view();
 
-		$company = $this->CompanyModel->view();
+        if($year) {
+            $data['invoices'] = $this->ReportModel->yearly_income_report($year);
+            $data['invoice_ysum'] = $this->ReportModel->yearly_income_report_sum($year);
+            $data['pos'] = $this->ReportModel->yearly_expense_report($year);
+            $data['po_ysum'] = $this->ReportModel->yearly_expense_report_sum($year);
+            $data['title'] = $year.' Income and Expense Report - '.$company[0]->name;
+        }
 
-		if($year) {
-			$data['invoices'] = $this->ReportModel->yearly_income_report($year);
-			$data['sum'] = $this->ReportModel->yearly_income_report_sum($year);
-			$data['pos'] = $this->ReportModel->yearly_expense_report($year);
-			$data['title'] = $year.' Income and Expense Report - '.$company[0]->name;
-		}
+        $this->load->view('header');
+        $this->load->view('reports/yearly_income_expense_report', $data);
+        $this->load->view("footer");
+    }
 
-		$this->load->view('header');
-		$this->load->view('reports/yearly_income_expense_report', $data);
-		$this->load->view("footer");
-	}
+    public function monthly_income_expense_report() {
+        $year = $this->input->post('year');
+        $month = $this->input->post('month');
 
-	public function monthly_income_expense_report() {
-		$year = $this->input->post('year');
-		$month = $this->input->post('month');
+        $data = array(
+            'invoices' => null,
+            'pos' => null,
+            'title' => null,
+            'invoice_msum' => null,
+            'po_msum' => null,
+        );
 
-		$data = array(
-			'invoices' => null,
-			'pos' => null,
-			'title' => null,
-			'sum' => null,
-		);
+        $company = $this->CompanyModel->view();
 
-		$company = $this->CompanyModel->view();
+        if($year) {
+            $data['invoices'] = $this->ReportModel->monthly_income_report($year, $month);
+            $data['invoice_msum'] = $this->ReportModel->monthly_income_report_sum($year, $month);
+            $data['pos'] = $this->ReportModel->monthly_expense_report($year, $month);
+            $data['po_msum'] = $this->ReportModel->monthly_expense_report_sum($year, $month);
+            $data['title'] = $year.'/'.$month.' Income and Expense Report - '.$company[0]->name;
+        }
 
-		if($year) {
-			$data['invoices'] = $this->ReportModel->monthly_income_report($year, $month);
-			$data['invoices'] = $this->ReportModel->monthly_income_report_sum($year, $month);
-			$data['pos'] = $this->ReportModel->monthly_expense_report($year, $month);
-			$data['title'] = $year.'/'.$month.' Income and Expense Report - '.$company[0]->name;
-		}
-
-		$this->load->view('header');
-		$this->load->view('reports/monthly_income_expense_report', $data);
-		$this->load->view("footer");
-	}
+        $this->load->view('header');
+        $this->load->view('reports/monthly_income_expense_report', $data);
+        $this->load->view("footer");
+    }
 }

@@ -58,7 +58,7 @@
 					<input type="submit" class="btn btn-custom btn-lg btn-block" value="Sing Up">
 				</form>
 				<footer id="footer">
-					<p>Powered by <a href="#">Ceylon Marine Equipment & Services</a> <br/> © - <?php echo date('Y'); ?></p>
+					<p>Powered by <a href="#">AgroFarm</a> <br/> © - <?php echo date('Y'); ?></p>
 				</footer>
 				<hr/>
 			</div>

@@ -12,8 +12,14 @@ class UserManagement extends CI_Controller {
 
     // load header, dashboard and footer pages
     public function index() {
-        $this->load->view('header');
-        $this->load->view('users/user_management');
-        $this->load->view("footer");
+        if(!$this->session->userdata('name')) {
+            redirect(redirect('login'));
+        }
+
+        else {
+            $this->load->view('header');
+            $this->load->view('users/user_management');
+            $this->load->view("footer");
+        }
     }
 }

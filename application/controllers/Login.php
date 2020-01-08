@@ -26,34 +26,23 @@ class Login extends CI_Controller {
 			'password'  => $this->input->post('password'),
 		);
 
-		// set system admin login credentials
-		if($login_data['email'] == 'admin@ceylonmarine.com' && $login_data['password'] == 'admin') {
-			$this->session->set_userdata('name', 'Admin');
-			$this->session->set_userdata('type', 'Admin');
-			$this->session->set_userdata('id', 1);
-			$this->session->set_userdata('email', 'admin@ceylonmarine.com');
-			redirect('home');
-		}
-		else {
-			// check is this registered user or not
-			$result = $this->UsersModel->login($login_data);
-			$company = $this->CompanyModel->view();
+        // check is this registered user or not
+        $result = $this->UsersModel->login($login_data);
+        $company = $this->CompanyModel->view();
 
-			// if login successful redirect to dashboard else redirect to login form
-			if ($result['success'] == True) {
-				$this->session->set_userdata('name', $result['data'][0]['first_name']. ' ' .$result['data'][0]['last_name']);
-				$this->session->set_userdata('id', $result['data'][0]['id']);
-				$this->session->set_userdata('type', $result['data'][0]['user_type']);
-				$this->session->set_userdata('email', $result['data'][0]['email']);
-				$this->session->set_userdata('logo', $company[0]->logo);
-				redirect('home');
-			}
-			else {
-				$this->session->set_flashdata('error', true);
-				redirect('login');
-			}
-		}
-
+        // if login successful redirect to dashboard else redirect to login form
+        if ($result['success'] == True) {
+            $this->session->set_userdata('name', $result['data'][0]['first_name']. ' ' .$result['data'][0]['last_name']);
+            $this->session->set_userdata('id', $result['data'][0]['id']);
+            $this->session->set_userdata('type', $result['data'][0]['user_type']);
+            $this->session->set_userdata('email', $result['data'][0]['email']);
+            $this->session->set_userdata('logo', $company[0]->logo);
+            redirect('home');
+        }
+        else {
+            $this->session->set_flashdata('error', true);
+            redirect('login');
+        }
 	}
 
 	public function signup() {
@@ -116,14 +105,14 @@ class Login extends CI_Controller {
 			);
 
 			$this->load->library('email', $mail_settings);
-			$this->email->from('admin@ceylonmarine.com', 'Ceylon Marine Equipment and Services (pvt) Ltd');
+			$this->email->from('admin@biogreen.com', 'Bio Green Holdings (pvt) Ltd');
 			$this->email->to($result[0]->email);
 			$this->email->set_mailtype("html");
 			$this->email->subject('Request Password Reset');
 			$this->email->message('
                 <p>Dear '.$result[0]->first_name.' '.$result[0]->last_name.',</p>
 
-                <p>You have been requested to reset your "CM Distribution Management System" password in order to get reset to your password click on the following link and enter your OTP code.</p>
+                <p>You have been requested to reset your "AgroFarm Management System" password in order to get reset to your password click on the following link and enter your OTP code.</p>
 
                 <p>Code : '.$result[0]->token.'</p>
                 <p>Link: <a href="'.base_url().'login/signup?email='.$result[0]->email.'">Reset Password Link</a> <br/>

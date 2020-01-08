@@ -52,7 +52,7 @@
 					<a href="<?php echo base_url(); ?>login/forgot_password" class="forget">Forgot your password?</a>
 
 					<footer id="footer">
-						<p>Powered by <a href="#">Ceylon Marine Equipment & Services</a> <br/> © - <?php echo date('Y'); ?></p>
+						<p>Powered by <a href="#">AgroFarm</a> <br/> © - <?php echo date('Y'); ?></p>
 					</footer>
 					<hr/>
 				</div>

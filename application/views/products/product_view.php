@@ -34,14 +34,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Code</label>
-                                            <input type="text" class="form-control" name="code" data-validation="required">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
+                                      <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Name</label>
                                             <input type="text" class="form-control" name="name" data-validation="required">
@@ -60,12 +53,11 @@
                                     <div class="form-group">
                                         <label>Category</label>
                                         <select class="form-control" name="category" data-validation="required">
+                                            <option selected disabled hidden>Select</option>
                                             <?php
-                                            foreach ($categories as $category) {
-                                                echo "<option selected disabled hidden>Select</option>";
-                                                echo "<option value='.$category->id.'>$category->name</option>";
-                                            }
-                                            ?>
+                                            foreach ($categories as $category) { ?>
+                                                <option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -123,24 +115,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Warranty</label>
-                                            <select type="text" class="form-control" name="warranty" id="product_warranty" data-validation="required">
-                                                <option selected disabled>Select warranty</option>
-                                                <option value="0">No Warranty</option>
-                                                <option value="1">1 Year</option>
-                                                <option value="2">2 Year</option>
-                                                <option value="5">5 Year</option>
-                                                <option value="6">Life Time</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -182,7 +156,7 @@
                             <?php
                             foreach ($products as $product) { ?>
                                 <tr>
-                                    <td><?php echo $product->code; ?></td>
+                                    <td><?php echo $product->code.$product->number; ?></td>
                                     <td><?php echo $product->name; ?></td>
                                     <td><?php echo $product->category; ?></td>
                                     <td class="text-right"><?php echo $product->quantity; ?></td>

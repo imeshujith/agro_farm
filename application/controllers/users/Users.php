@@ -119,21 +119,21 @@ class Users extends CI_Controller {
         );
 
         $this->load->library('email', $mail_settings);
-        $this->email->from('admin@ceylonmarine.com', 'Ceylon Marine Equipment and Services (Pvt) Ltd');
+        $this->email->from('admin@biogreen.com', 'Bio Green Holdings (Pvt) Ltd');
         $this->email->to($new_user['email']);
         $this->email->set_mailtype("html");
-        $this->email->subject('Invitation for CM Distribution Management System - Ceylon Marine Equipment and Services (Pvt) Ltd');
+        $this->email->subject('Invitation for AgroFarm Management System - Bio Green Holdings (Pvt) Ltd');
         $this->email->message('
             <p>Dear '.$new_user['first_name'].' '.$new_user['last_name'].',</p>
 
-            <p>You have been invited to connect to "Ceylon Marine Equipment and Services (Pvt) Ltd" in order to get access to our system CM Distribution Management System.</p>
+            <p>You have been invited to connect to "Bio Green Holdings (Pvt) Ltd" in order to get access to our system AgroFarm Management System.</p>
             <p>OTP Code : '.$new_user['token'].'</p>
             <p>To accept the invitation, click on the following link: <a href="'.base_url().'/login/signup?email='.$new_user['email'].'">Invitation Link</a> and enter your email and OTP code</p>
-            <p>Accept invitation to "Ceylon Marine Equipment and Services (Pvt) Ltd"</p> <br/>
+            <p>Accept invitation to "Bio Green Holdings (Pvt) Ltd"</p> <br/>
 
             <p>Best regards,</p>
             <p>'.$this->session->userdata('name').'</p>
-            <p>CM Distribution Management System - Ceylon Marine Equipment and Services (pvt) Ltd</p>
+            <p>AgroFarm Management System - Bio Green Holdings (pvt) Ltd</p>
             ');
         $this->email->send();
     }

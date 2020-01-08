@@ -80,7 +80,17 @@ Class ReportModel extends CI_Model {
 			->from('invoice')
 			->join('customers', 'customers.id = invoice.customers_id')
 			->where('Year(date) =', $year)
+			->where('status !=', 'Cancel')
 			->order_by('date', 'ASD')
+			->get()
+			->result();
+	}
+
+	public function yearly_income_report_sum($year) {
+		return $this->db->select('sum(total_amount) as total')
+			->from('invoice')
+			->where('Year(date) =', $year)
+			->where('status !=', 'Cancel')
 			->get()
 			->result();
 	}
@@ -95,13 +105,32 @@ Class ReportModel extends CI_Model {
 			->result();
 	}
 
+	public function yearly_expense_report_sum($year) {
+		return $this->db->select('sum(total_amount) as total')
+			->from('purchase')
+			->where('Year(date) =', $year)
+			->get()
+			->result();
+	}
+
 	public function monthly_income_report($year, $month) {
 		return $this->db->select('invoice.*, customers.first_name as first_name, customers.last_name as last_name')
 			->from('invoice')
 			->join('customers', 'customers.id = invoice.customers_id')
 			->where('Year(date) =', $year)
 			->where('Month(date) =', $month)
+			->where('status !=', 'Cancel')
 			->order_by('date', 'ASD')
+			->get()
+			->result();
+	}
+
+	public function monthly_income_report_sum($year, $month) {
+		return $this->db->select('sum(total_amount) as total')
+			->from('invoice')
+			->where('Year(date) =', $year)
+			->where('Month(date) =', $month)
+			->where('status !=', 'Cancel')
 			->get()
 			->result();
 	}
@@ -113,6 +142,15 @@ Class ReportModel extends CI_Model {
 			->where('Year(date) =', $year)
 			->where('Month(date) =', $month)
 			->order_by('date', 'ASD')
+			->get()
+			->result();
+	}
+
+	public function monthly_expense_report_sum($year, $month) {
+		return $this->db->select('sum(total_amount) as total')
+			->from('purchase')
+			->where('Year(date) =', $year)
+			->where('Month(date) =', $month)
 			->get()
 			->result();
 	}

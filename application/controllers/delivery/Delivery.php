@@ -78,7 +78,7 @@ class Delivery extends CI_Controller {
 			);
 
 			$this->load->library('email', $mail_settings);
-			$this->email->from('delivery@ceylonmarine.com', 'Ceylon Marine Equipment and Services (pvt) Ltd');
+			$this->email->from('delivery@biogreen.com', 'Bio Green Holdings (pvt) Ltd');
 			$this->email->to($result[0]->email);
 			$this->email->set_mailtype("html");
 			$this->email->subject($result[0]->number.$result[0]->id.' order has ready to ship');
@@ -89,7 +89,7 @@ class Delivery extends CI_Controller {
 
             <p>Best regards,</p>
             <p>'.$this->session->userdata('name').'</p>
-            <p>CM Distribution Management System - Ceylon Marine Equipment and Services (pvt) Ltd</p>
+            <p>AgroFarm Management System - Bio Green Holdings (pvt) Ltd</p>
             ');
 			$this->email->send();
 		}
@@ -116,7 +116,7 @@ class Delivery extends CI_Controller {
 			);
 
 			$this->load->library('email', $mail_settings);
-			$this->email->from('delivery@ceylonmarine.com', 'Ceylon Marine Equipment and Services (pvt) Ltd');
+			$this->email->from('delivery@biogreen.com', 'Bio Green Holdings (pvt) Ltd');
 			$this->email->to($result[0]->email);
 			$this->email->set_mailtype("html");
 			$this->email->subject($result[0]->number.$result[0]->id.' order has shipped');
@@ -127,7 +127,7 @@ class Delivery extends CI_Controller {
 
 				<p>Best regards,</p>
 				<p>' . $this->session->userdata('name') . '</p>
-				<p>CM Distribution Management System - Ceylon Marine Equipment and Services (pvt) Ltd</p>
+				<p>AgroFarm Management System - Bio Green Holdings (pvt) Ltd</p>
 				');
 			$this->email->send();
 		}
@@ -153,7 +153,7 @@ class Delivery extends CI_Controller {
 			);
 
 			$this->load->library('email', $mail_settings);
-			$this->email->from('delivery@ceylonmarine.com', 'Ceylon Marine Equipment and Services (pvt) Ltd');
+			$this->email->from('delivery@biogreen.com', 'Bio Green Holdings (pvt) Ltd');
 			$this->email->to($result[0]->email);
 			$this->email->set_mailtype("html");
 			$this->email->subject($result[0]->number.$result[0]->id.' order has canceled');
@@ -164,7 +164,7 @@ class Delivery extends CI_Controller {
 
             <p>Best regards,</p>
             <p>' . $this->session->userdata('name') . '</p>
-            <p>CM Distribution Management System - Ceylon Marine Equipment and Services (pvt) Ltd</p>
+            <p>AgroFarm Management System - Bio Green Holdings (pvt) Ltd</p>
             ');
 			$this->email->send();
 		}

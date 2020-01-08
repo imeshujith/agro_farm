@@ -36,7 +36,6 @@ class Products extends CI_Controller {
 
     public function create_product() {
         $new_product = array(
-            'code'                  => $this->input->post('code'),
             'name'                  => $this->input->post('name'),
             'description'           => $this->input->post('description'),
             'product_category_id'   => $this->input->post('category'),
@@ -45,9 +44,24 @@ class Products extends CI_Controller {
             'quantity'				=> $this->input->post('quantity'),
 			'minimum_qty'           => $this->input->post('minimum'),
 			'maximum_qty'           => $this->input->post('maximum'),
-			'warranty'              => $this->input->post('warranty'),
             'create_date'           => date("Y-m-d"),
         );
+
+        $category_id = $new_product['product_category_id'];
+        $category = $this->ProductCategoriesModel->single_item($category_id);
+
+        $last_product_code = $this->ProductsModel->get_category_wise_product($category_id);
+
+
+        if($last_product_code) {
+            $new_product['code'] = $category[0]->code;
+            $new_product['number'] = (int)$last_product_code[0]->number + 1;
+        }
+
+        else {
+            $new_product['code'] = $category[0]->code;
+            $new_product['number'] = 1;
+        }
 
         $result = $this->ProductsModel->create($new_product);
 		if($result) {
@@ -64,7 +78,6 @@ class Products extends CI_Controller {
     	$product_id = $this->input->post('id');
 
 		$new_values = array(
-			'code'                  => $this->input->post('code'),
 			'name'                  => $this->input->post('name'),
 			'description'           => $this->input->post('description'),
 			'product_category_id'   => $this->input->post('category'),
@@ -73,7 +86,6 @@ class Products extends CI_Controller {
 			'quantity'				=> $this->input->post('quantity'),
 			'minimum_qty'           => $this->input->post('minimum'),
 			'maximum_qty'           => $this->input->post('maximum'),
-			'warranty'              => $this->input->post('warranty'),
 			'edit_date'             => date("Y-m-d"),
 		);
 
@@ -108,7 +120,7 @@ class Products extends CI_Controller {
     	$cat_id = $this->input->post('cat_id');
 
     	$new_qty = array(
-    		'quantity' => $this->input->post('stock_new_quantity'),
+    		'quantity' => (int)$this->input->post('current_qty') + (int)$this->input->post('stock_new_quantity'),
 		);
 
 		$result = $this->ProductsModel->update($product_id, $new_qty);

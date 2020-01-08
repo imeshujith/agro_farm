@@ -89,7 +89,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Current Quantity</label>
-                                                        <input type="text" class="form-control" id="stock_current_quantity" readonly/>
+                                                        <input type="text" class="form-control" name="current_qty" id="stock_current_quantity" readonly/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,7 +113,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>New Quantity</label>
+                                                        <label>Add New Quantity</label>
                                                         <input type="text" class="form-control" name="stock_new_quantity" id="stock_new_quantity" data-validation="required"/>
                                                     </div>
                                                 </div>
@@ -159,9 +159,10 @@
 
         $(function () {
             $("#quantity_update_form").submit(function () {
+                var current_qty = $("#stock_current_quantity").val()
                 var quantity = $("#stock_new_quantity").val();
                 var maximum = $("#stock_quantity_maximum").val();
-                if (parseInt(quantity) > parseInt(maximum)) {
+                if (parseInt(quantity) + (parseInt(current_qty) > parseInt(maximum)) {
                     Swal.fire(' Inventory level exceeded. Check your product quantity and maximum quantity.');
                     return false;
                 }

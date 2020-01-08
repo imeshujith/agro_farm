@@ -31,14 +31,6 @@
 <script>var base_url = '<?php echo site_url() ?>';</script>
 <!-- Custom JS -->
 <script src="<?php echo base_url()?>assets/js/custom.js"></script>
-<!-- Invoice JS -->
-<script src="<?php echo base_url()?>assets/js/invoice.js"></script>
-<!-- Customer JS -->
-<script src="<?php echo base_url()?>assets/js/customer.js"></script>
-<!-- Supplier JS -->
-<script src="<?php echo base_url()?>assets/js/supplier.js"></script>
-<!-- Purchase JS -->
-<script src="<?php echo base_url()?>assets/js/purchase.js"></script>
 <!-- Bootstrap Notify -->
 <script src="<?php echo base_url()?>assets/js/bootstrap-notify.min.js"></script>
 <!-- DataTables -->

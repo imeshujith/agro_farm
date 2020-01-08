@@ -51,6 +51,17 @@ Class ProductsModel extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	public function get_category_wise_product($category_id) {
+		$this->db->select('product_category.code as code, product.number as number');
+		$this->db->from('product');
+		$this->db->join('product_category', 'product_category.id = product.product_category_id');
+		$this->db->where('product.product_category_id', $category_id);
+		$this->db->order_by('product.id', 'ASD');
+		$this->db->limit(1);
+		$query = $this->db->get();
+		return $query->result();
+	}
 }
 
 ?>
