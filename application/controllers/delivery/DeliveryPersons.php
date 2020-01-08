@@ -38,4 +38,46 @@ class DeliveryPersons extends CI_Controller {
 			redirect('delivery/DeliveryPersons');
 		}
 	}
+
+	public function update_person() {
+	    $id = $this->input->post('update_dp_id');
+
+	    $new_values = array(
+	        'name' => $this->input->post('update_dp_name'),
+	        'nic' => $this->input->post('update_dp_nic'),
+	        'contact' => $this->input->post('update_dp_contact'),
+        );
+
+	    $result = $this->DeliveryPersonsModel->update($id, $new_values);
+
+	    if ($result) {
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Delivery person\'s information updated successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('delivery/DeliveryPersons');
+        }
+	    else {
+            redirect('delivery/DeliveryPersons');
+        }
+    }
+
+    public function inactive_person() {
+	    $id = $this->input->get('id');
+        $result = $this->DeliveryPersonsModel->inactive($id);
+
+        if ($result) {
+            redirect('delivery/DeliveryPersons');
+        }
+    }
+
+    public function active_person() {
+        $id = $this->input->get('id');
+        $result = $this->DeliveryPersonsModel->active($id);
+
+        if ($result) {
+            redirect('delivery/DeliveryPersons');
+        }
+    }
 }
