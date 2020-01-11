@@ -8,7 +8,7 @@
 ?>
 <!-- ================== Start Footer ============================ -->
 <footer class="main-footer">
-    <strong>CM Distribution Management System Copyright &copy; 2019</strong> All rights reserved.
+    <strong>AgroFarm Management System &copy; 2019</strong> All rights reserved.
 </footer>
 <!-- ================== End Footer ============================ -->
 

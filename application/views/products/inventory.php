@@ -13,7 +13,7 @@
                             <div class="text-right">
                                 <form action="<?php echo base_url(); ?>products/stock" method="get">
                                     <input type="hidden" name="cat_id" id="cat_id" value="<?php echo $inventory->cat_id; ?>">
-                                    <button class="btn btn-primary" tye="button">View Inventory</button></a>
+                                    <button class="btn btn-success" tye="button">View Inventory</button></a>
                                 </form>
                             </div>
                         </div>

@@ -116,7 +116,7 @@
 												</div>
 												<div class="form-group" style="margin-top: 80px;">
 													<div class="col-sm-offset-8 col-sm-4 text-right">
-														<button type="submit" class="btn btn-primary">Update Details</button>
+														<button type="submit" class="btn btn-success">Update Details</button>
 													</div>
 												</div>
 											</form>

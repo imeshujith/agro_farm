@@ -94,7 +94,7 @@
 								</div>
 							</div>
 							<div class="box-footer">
-								<button class="btn btn-primary" type="submit">Create Purchase Order</button>
+								<button class="btn btn-success" type="submit">Create Purchase Order</button>
 							</div>
 					</form>
 				</div>

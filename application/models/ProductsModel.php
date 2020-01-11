@@ -57,7 +57,7 @@ Class ProductsModel extends CI_Model {
 		$this->db->from('product');
 		$this->db->join('product_category', 'product_category.id = product.product_category_id');
 		$this->db->where('product.product_category_id', $category_id);
-		$this->db->order_by('product.id', 'ASD');
+		$this->db->order_by('product.id', 'DESC');
 		$this->db->limit(1);
 		$query = $this->db->get();
 		return $query->result();

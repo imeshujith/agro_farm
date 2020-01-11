@@ -49,7 +49,7 @@
                     <div class="box-footer">
                         <div class="pull-right">
                             <button type="reset" class="btn btn-default">Discard</button>
-                            <button type="submit" class="btn btn-primary">Send Email</button>
+                            <button type="submit" class="btn btn-success">Send Email</button>
                         </div>
 						</form>
                     </div>

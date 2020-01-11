@@ -119,7 +119,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-default">Reset</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
                 </form>
             </div>
@@ -136,7 +136,7 @@
                             Products
                         </h3>
                         <div class="pull-right">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#create_product_modal"> Add New Product</button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#create_product_modal"> Add New Product</button>
                         </div>
                     </div>
                     <div class="box-body">
@@ -188,7 +188,7 @@
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>Code</label>
-                                                                    <input type="text" class="form-control" name="code" id="update_product_code">
+                                                                    <input type="text" class="form-control" name="code" id="update_product_code" readonly>
                                                                     <input type="hidden" class="form-control" name="id" id="update_product_id">
                                                                 </div>
                                                             </div>
@@ -269,29 +269,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="form-group">
-                                                                    <label>Warranty</label>
-                                                                    <select type="text" class="form-control" name="warranty" id="update_product_warranty" data-validation="required">
-                                                                        <option selected disabled>Select warranty</option>
-                                                                        <option value="0">No Warranty</option>
-                                                                        <option value="1">1 Year</option>
-                                                                        <option value="2">2 Year</option>
-                                                                        <option value="5">5 Year</option>
-                                                                        <option value="6">Life Time</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                <button type="submit" class="btn btn-success">Update</button>
                                             </div>
                                         </form>
                                     </div>
@@ -340,7 +322,7 @@
                 data: {id: id},
                 success: function (response) {
                     $('#update_product_id').val(response[0]['id']);
-                    $('#update_product_code').val(response[0]['code']);
+                    $('#update_product_code').val(response[0]['code'] + response[0]['number']);
                     $('#update_product_name').val(response[0]['name']);
                     $('#update_product_desc').text(response[0]['description']);
                     $('#update_product_category').val(response[0]['category_id']).change();;

@@ -12,7 +12,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CM Distribution Management System Management System</title>
+	<title>AgroFarm Management System</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.7 -->
@@ -43,7 +43,7 @@
 	<script src="<?php echo base_url()?>assets/bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 
-<body class="fixed sidebar-mini sidebar-mini-expand-feature skin-blue" style="height: auto; min-height: 100%;" onload="startTime()">
+<body class="fixed sidebar-mini sidebar-mini-expand-feature skin-green-light" style="height: auto; min-height: 100%;" onload="startTime()">
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -159,19 +159,6 @@
 						</a>
 					</li>
 				<?php } ?>
-
-				<li class="treeview">
-					<a href="#">
-						<i class="fa fa-reply"></i> &nbsp;&nbsp;<span>Return Management</span>
-						<span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-						</span>
-						<ul class="treeview-menu">
-							<li><a href="<?php echo base_url(); ?>returns/returns"><i class="fa fa-angle-right"></i> Create Returns</a></li>
-							<li><a href="<?php echo base_url(); ?>returns/returns/all_returns"><i class="fa fa-angle-right"></i> View Returns</a></li>
-						</ul>
-					</a>
-				</li>
 
 				<li>
 					<a href="<?php echo base_url(); ?>suppliers/supplier">

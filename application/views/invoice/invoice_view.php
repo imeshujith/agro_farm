@@ -110,7 +110,7 @@
 							</div>
 					</form>
 					<div class="box-footer">
-						<button class="btn btn-primary" type="submit">Create Invoice</button>
+						<button class="btn btn-success" type="submit">Create Invoice</button>
 					</div>
 				</div>
 			</div>

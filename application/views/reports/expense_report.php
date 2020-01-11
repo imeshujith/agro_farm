@@ -23,7 +23,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-3">
-									<button class="btn btn-primary">Generate Report</button>
+									<button class="btn btn-success">Generate Report</button>
 								</div>
 							</div>
 						</form>

@@ -31,7 +31,7 @@
 							Customers
 						</h3>
 						<div class="pull-right">
-							<button class="btn btn-primary" data-toggle="modal" data-target="#add_customer_modal">&nbsp;&nbsp;Add New Customer</button>
+							<button class="btn btn-success" data-toggle="modal" data-target="#add_customer_modal">&nbsp;&nbsp;Add New Customer</button>
 						</div>
 					</div>
 					<div class="box-body">
@@ -184,7 +184,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="reset" class="btn btn-default">Reset</button>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-success">Submit</button>
 					</div>
 					</form>
 				</div>
@@ -300,7 +300,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-						<button type="submit" class="btn btn-primary">Update</button>
+						<button type="submit" class="btn btn-success">Update</button>
 					</div>
 					</form>
 				</div>

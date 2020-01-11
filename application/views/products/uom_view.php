@@ -79,7 +79,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="reset" class="btn btn-default" id="button_close">Clear</button>
-								<button type="submit" class="btn btn-primary" id="button_save">Save</button>
+								<button type="submit" class="btn btn-success" id="button_save">Save</button>
 							</div>
 						</form>
 					</div>
@@ -111,7 +111,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal"> Cancel </button>
-							<button type="submit" class="btn btn-primary"> Update </button>
+							<button type="submit" class="btn btn-success"> Update </button>
 							</form>
 						</div>
 					</div>

@@ -11,9 +11,9 @@
                         <div class="pull-right">
 							<?php if($invoice[0]->status == 'Draft') { ?>
 								<a href="<?php echo base_url(); ?>invoice/invoice/cancel_invoice?id=<?php echo $invoice[0]->id; ?>" class="btn btn-danger btn-sm">Cancel Invoice</a>
-								<a href="<?php echo base_url(); ?>invoice/invoice/confirm_invoice?id=<?php echo $invoice[0]->id; ?>" class="btn btn-primary btn-sm">Confirm Invoice</a>
+								<a href="<?php echo base_url(); ?>invoice/invoice/confirm_invoice?id=<?php echo $invoice[0]->id; ?>" class="btn btn-success btn-sm">Confirm Invoice</a>
 							<?php } elseif($invoice[0]->status != 'Draft' && $invoice[0]->status != 'Cancel') { ?>
-								<a href="<?php echo base_url(); ?>delivery/delivery/single_delivery_order?id=<?php echo $do_id[0]->id; ?>" class="btn btn-primary btn-sm">View Delivery Order</a>
+								<a href="<?php echo base_url(); ?>delivery/delivery/single_delivery_order?id=<?php echo $do_id[0]->id; ?>" class="btn btn-success btn-sm">View Delivery Order</a>
 							<?php } ?>
                         </div>
                     </div>

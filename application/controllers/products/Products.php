@@ -52,7 +52,6 @@ class Products extends CI_Controller {
 
         $last_product_code = $this->ProductsModel->get_category_wise_product($category_id);
 
-
         if($last_product_code) {
             $new_product['code'] = $category[0]->code;
             $new_product['number'] = (int)$last_product_code[0]->number + 1;
