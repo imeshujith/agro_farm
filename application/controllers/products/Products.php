@@ -119,7 +119,7 @@ class Products extends CI_Controller {
     	$cat_id = $this->input->post('cat_id');
 
     	$new_qty = array(
-    		'quantity' => (int)$this->input->post('current_qty') + (int)$this->input->post('stock_new_quantity'),
+    		'quantity' => (int)$this->input->post('stock_new_quantity'),
 		);
 
 		$result = $this->ProductsModel->update($product_id, $new_qty);

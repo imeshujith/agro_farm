@@ -17,15 +17,15 @@
 								<th class="text-right">Unit Price</th>
 								<th class="text-right">Quantity</th>
 								<th>UoM</th>
+								<th class="text-right">Total Value</th>
 								<th>Inventory Level</th>
-                                <th class="text-right">Total Value</th>
 								<th></th>
 							</tr>
 							</thead>
 							<tbody id="stock_table">
 							<?php foreach($products as $product) { ?>
 								<tr>
-									<td><?php echo $product->code; ?></td>
+									<td><?php echo $product->code.$product->number; ?></td>
 									<td><?php echo $product->name; ?></td>
 									<td class="text-right">Rs.<?php echo $product->price; ?></td>
 									<td class="text-right"><?php echo $product->quantity; ?></td>
@@ -159,10 +159,9 @@
 
         $(function () {
             $("#quantity_update_form").submit(function () {
-                var current_qty = $("#stock_current_quantity").val()
                 var quantity = $("#stock_new_quantity").val();
                 var maximum = $("#stock_quantity_maximum").val();
-                if (parseInt(quantity) + (parseInt(current_qty) > parseInt(maximum)) {
+                if (parseInt(quantity) > parseInt(maximum)) {
                     Swal.fire(' Inventory level exceeded. Check your product quantity and maximum quantity.');
                     return false;
                 }

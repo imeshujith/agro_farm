@@ -6,6 +6,7 @@ Class InventoryModel extends CI_Model {
         $this->db->from('product');
         $this->db->join('product_category', 'product_category.id = product.product_category_id');
         $this->db->group_by('product_category_id');
+        $this->db->order_by('category', 'ASD');
         $query = $this->db->get();
         return $query->result();
     }
