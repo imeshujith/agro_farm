@@ -179,18 +179,13 @@
 									<td><?php echo $supplier->email; ?></td>
                                     <td class="text-center">
                                         <?php if($supplier->active == true) { ?>
-                                            <span class="label label-success">Active</span>
+											<a href="<?php echo base_url(); ?>suppliers/suppliers/inactive_supplier?id=<?php echo $supplier->id; ?>"><span class="label label-success">Active</span></a>
                                         <?php } else { ?>
-                                            <span class="label label-danger">Inactive</span>
+											<a href="<?php echo base_url(); ?>suppliers/suppliers/active_supplier?id=<?php echo $supplier->id; ?>"><span class="label label-danger">Inactive</span></a>
                                         <?php } ?>
                                     </td>
 									<td><?php echo $supplier->create_date; ?></td>
 									<td class="text-center">
-                                        <?php if($supplier->active == true) { ?>
-                                            <a href="<?php echo base_url(); ?>customers/customer/inactive_customer?id=<?php echo $supplier->id; ?>" class="btn btn-default btn-sm">Inactive</a>
-                                        <?php } else { ?>
-                                            <a href="<?php echo base_url(); ?>customers/customer/active_customer?id=<?php echo $supplier->id; ?>" class="btn btn-default btn-sm">Active</a>
-                                        <?php } ?>
 										<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#update_customer_modal<?php echo $supplier->id; ?>">Update</button>
 										<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_supplier_modal<?php echo $supplier->id; ?>">Delete</button>
 									</td>

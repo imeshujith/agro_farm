@@ -164,18 +164,14 @@
                                     <td class="text-left"><?php echo $product->uom; ?></td>
                                     <td class="text-right"><?php echo $product->price; ?></td>
                                     <td class="text-center">
+
                                         <?php if($product->active == true) { ?>
-                                            <span class="label label-success">Active</span>
+											<a href="<?php echo base_url(); ?>products/products/inactive_product?id=<?php echo $product->id; ?>"><span class="label label-success">Active</span></a>
                                         <?php } else { ?>
-                                            <span class="label label-danger">Inactive</span>
+											<a href="<?php echo base_url(); ?>products/products/active_product?id=<?php echo $product->id; ?>"><span class="label label-danger">Inactive</span></a>
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php if($product->active == true) { ?>
-                                            <a href="<?php echo base_url(); ?>customers/customer/inactive_customer?id=<?php echo $product->id; ?>" class="btn btn-default btn-sm">Inactive</a>
-                                        <?php } else { ?>
-                                            <a href="<?php echo base_url(); ?>customers/customer/active_customer?id=<?php echo $product->id; ?>" class="btn btn-default btn-sm">Active</a>
-                                        <?php } ?>
                                         <button class="btn btn-primary btn-xs" id="update_product" data-id="<?php echo $product->id; ?>">Update</button>
                                         <button class="btn btn-danger btn-xs" id="delete_product" data-id="<?php echo $product->id; ?>">Delete</button>
                                     </td>
