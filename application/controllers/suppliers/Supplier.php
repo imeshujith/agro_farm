@@ -107,4 +107,38 @@ class Supplier extends CI_Controller {
 		$result = $this->SupplierModel->postal_code($city);
 		echo json_encode($result);
 	}
+
+    public function active_supplier() {
+        $supplier_id = $this->input->get('id');
+        $result = $this->SupplierModel->active($supplier_id);
+        if($result) {
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Supplier activated successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('suppliers/supplier');
+        }
+
+        else {
+            redirect('suppliers/supplier');
+        }
+    }
+
+    public function inactive_supplier() {
+        $supplier_id = $this->input->get('id');
+        $result = $this->SupplierModel->inactive($supplier_id);
+        if($result) {
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Supplier inactivate successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('suppliers/supplier');
+        }
+
+        else {
+            redirect('suppliers/supplier');
+        }
+    }
 }

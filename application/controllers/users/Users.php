@@ -20,8 +20,11 @@ class Users extends CI_Controller {
 
     // load header, dashboard and footer pages
     public function index() {
+        $data = array(
+            'users' => $this->UsersModel->view_all_users(),
+        );
         $this->load->view('header');
-        $this->load->view('users/user_view');
+        $this->load->view('users/user_view', $data);
         $this->load->view("footer");
     }
 
@@ -95,7 +98,7 @@ class Users extends CI_Controller {
             else {
                 $error = array (
                     'error' => false,
-                    'message' => '<p>User created successfully</p><p>Invitation link send to given email address</p>',
+                    'message' => '<p>User created successfully</p><p>Invitation link send to the new user\'s email address</p>',
                 );
                 // send invitation email to new user
                 $this->send_invitation_email($new_user);

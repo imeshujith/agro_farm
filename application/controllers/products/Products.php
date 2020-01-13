@@ -128,4 +128,38 @@ class Products extends CI_Controller {
 			redirect('products/stock?cat_id='.$cat_id);
 		}
 	}
+
+    public function active_product() {
+        $product_id = $this->input->get('id');
+        $result = $this->ProductsModel->active($product_id);
+        if($result) {
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Product activate successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('products/products');
+        }
+
+        else {
+            redirect('products/products');
+        }
+    }
+
+    public function inactive_product() {
+        $product_id = $this->input->get('id');
+        $result = $this->ProductsModel->inactive($product_id);
+        if($result) {
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Product inactivate successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('products/products');
+        }
+
+        else {
+            redirect('products/products');
+        }
+    }
 }

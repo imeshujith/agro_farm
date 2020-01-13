@@ -6,6 +6,12 @@ Class DeliveryPersonsModel extends CI_Model {
 		return $query->result();
 	}
 
+	public function active_persons() {
+		$this->db->where('active', true);
+		$query = $this->db->get('delivery_persons');
+		return $query->result();
+	}
+
 	public function create($person) {
 		$this->db->insert('delivery_persons', $person);
 		return true;

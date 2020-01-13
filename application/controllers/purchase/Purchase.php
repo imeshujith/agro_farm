@@ -21,8 +21,8 @@ class Purchase extends CI_Controller {
 	public function index() {
 
 		$data = array(
-			'products' => $this->ProductsModel->view(),
-			'suppliers'  => $this->SupplierModel->view(),
+			'products' => $this->ProductsModel->active_products(),
+			'suppliers'  => $this->SupplierModel->active_suppliers(),
 			'company'	 => $this->CompanyModel->view(),
 		);
 

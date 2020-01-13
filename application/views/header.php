@@ -50,9 +50,9 @@
 	<!-- ================== Start Header ============================= -->
 	<header class="main-header fixed">
 		<!-- Logo -->
-		<a href="index2.html" class="logo">
+		<a href="#" class="logo">
 			<!-- logo for regular state and mobile devices -->
-			<span class="logo-lg"><b>Ceylon</b>Marine</span>
+			<span class="logo-lg"><b>Agro</b>Farm</span>
 		</a>
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top">
@@ -73,7 +73,7 @@
 						<a href="<?php echo base_url(); ?>users/UserProfile"><?php echo $this->session->userdata('name') ;?></a>
 					</li>
 					<li>
-						<a href="$" data-toggle="modal" data-target="#logout_modal"><i class="fa fa-sign-out"></i> Logout</a>
+						<a href="#" data-toggle="modal" data-target="#logout_modal"><i class="fa fa-sign-out"></i> Logout</a>
 					</li>
 				</ul>
 			</div>

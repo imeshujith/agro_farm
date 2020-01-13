@@ -21,7 +21,7 @@ class Invoice extends CI_Controller {
     public function index() {
         $data = array(
             'categories' => $this->ProductCategoriesModel->view(),
-            'customers'  => $this->CustomerModel->view(),
+            'customers'  => $this->CustomerModel->active_customers(),
 			'company'	 => $this->CompanyModel->view(),
         );
 
@@ -179,7 +179,7 @@ class Invoice extends CI_Controller {
 	}
 
 	public function generate_new_invoice_line() {
-		$products = $this->ProductsModel->view();
+		$products = $this->ProductsModel->active_products();
 
 		$row = '<option selected disabled>Select Product</option>';
 		foreach($products as $product) {

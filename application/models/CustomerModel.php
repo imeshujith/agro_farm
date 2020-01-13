@@ -7,6 +7,13 @@ Class CustomerModel extends CI_Model {
         return $query->result();
     }
 
+	public function active_customers() {
+		$this->db->from('customers');
+		$this->db->where('active', 1);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
     public function create($new_customer) {
         $this->db->insert('customers', $new_customer);
 		if ($this->db->affected_rows() == 1) {
@@ -51,6 +58,28 @@ Class CustomerModel extends CI_Model {
 		$this->db->where('name_en', $city);
 		$query = $this->db->get();
 		return $query->result();
+	}
+
+	public function active($customer_id) {
+		$this->db->where('id', $customer_id);
+		$this->db->update('customers', array('active' => 1));
+		if ($this->db->affected_rows() == 1) {
+			return true;;
+		}
+		else {
+			return false;;
+		}
+	}
+
+	public function inactive($customer_id) {
+		$this->db->where('id', $customer_id);
+		$this->db->update('customers', array('active' => 0));
+		if ($this->db->affected_rows() == 1) {
+			return true;;
+		}
+		else {
+			return false;;
+		}
 	}
 }
 

@@ -29,8 +29,6 @@
 <script src="<?php echo base_url()?>assets/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- Base URL -->
 <script>var base_url = '<?php echo site_url() ?>';</script>
-<!-- Custom JS -->
-<script src="<?php echo base_url()?>assets/js/custom.js"></script>
 <!-- Bootstrap Notify -->
 <script src="<?php echo base_url()?>assets/js/bootstrap-notify.min.js"></script>
 <!-- DataTables -->
@@ -93,17 +91,10 @@
 		})
     });
 </script>
-<script type="text/javascript">
-    $(document).ready(function($) {
-        $(".invoice-row").click(function() {
-            window.document.location = $(this).data("href");
-        });
-    });
-</script>
 <script>
+    // jquery validate plugin
     $.validate();
-</script>
-<script>
+
     $(function () {
         //bootstrap WYSIHTML5 - text editor
         $('.textarea').wysihtml5()

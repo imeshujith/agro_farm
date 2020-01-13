@@ -38,13 +38,14 @@
 						<table class="table table-bordered table-striped table-responsive data_tables">
 							<thead>
 							<tr>
-								<td>Code</td>
-								<td>Name</td>
-								<td>Address</td>
-								<td>Phone</td>
-								<td>Email</td>
-								<td>Create Date</td>
-								<td width="15%"></td>
+								<th>Code</th>
+								<th>Name</th>
+								<th>Address</th>
+								<th>Phone</th>
+								<th>Email</th>
+                                <th class="text-center">Status</th>
+								<th>Create Date</th>
+								<th width="20%"></th>
 							</tr>
 							</thead>
 
@@ -62,8 +63,20 @@
 									</td>
 									<td><?php echo $customer->phone; ?></td>
 									<td><?php if($customer->email) { echo $customer->email; } else { echo '-';} ?></td>
+                                    <td class="text-center">
+                                        <?php if($customer->active == true) { ?>
+                                            <span class="label label-success">Active</span>
+                                        <?php } else { ?>
+                                            <span class="label label-danger">Inactive</span>
+                                        <?php } ?>
+                                    </td>
 									<td><?php echo $customer->create_date; ?></td>
 									<td class="text-center">
+                                        <?php if($customer->active == true) { ?>
+                                            <a href="<?php echo base_url(); ?>customers/customer/inactive_customer?id=<?php echo $customer->id; ?>" class="btn btn-default btn-sm">Inactive</a>
+                                        <?php } else { ?>
+                                            <a href="<?php echo base_url(); ?>customers/customer/active_customer?id=<?php echo $customer->id; ?>" class="btn btn-default btn-sm">Active</a>
+                                        <?php } ?>
 										<button class="btn btn-primary btn-sm" id="update_customer" data-id="<?php echo $customer->id; ?>">Update</button>
 										<button class="btn btn-danger btn-sm" id="delete_customer" data-id="<?php echo $customer->id; ?>">Delete</button>
 									</td>

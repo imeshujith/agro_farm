@@ -12,7 +12,7 @@ class DeliveryPersons extends CI_Controller {
 
 	public function index() {
 		$data = array(
-			'persons' => $this->DeliveryPersonsModel->view(),
+			'persons' => $this->DeliveryPersonsModel->active_persons(),
 		);
 
 		$this->load->view('header');
@@ -67,7 +67,15 @@ class DeliveryPersons extends CI_Controller {
 	    $id = $this->input->get('id');
         $result = $this->DeliveryPersonsModel->inactive($id);
 
-        if ($result) {
+        if($result) {
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Delivery person inactivate successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('delivery/DeliveryPersons');
+        }
+        else {
             redirect('delivery/DeliveryPersons');
         }
     }
@@ -76,7 +84,15 @@ class DeliveryPersons extends CI_Controller {
         $id = $this->input->get('id');
         $result = $this->DeliveryPersonsModel->active($id);
 
-        if ($result) {
+        if($result) {
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Delivery person inactivate successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('delivery/DeliveryPersons');
+        }
+        else {
             redirect('delivery/DeliveryPersons');
         }
     }

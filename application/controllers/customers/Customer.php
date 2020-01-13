@@ -115,4 +115,38 @@ class Customer extends CI_Controller {
 		$result = $this->CustomerModel->postal_code($city);
     	echo json_encode($result);
 	}
+
+    public function active_customer() {
+        $customer_id = $this->input->get('id');
+        $result = $this->CustomerModel->active($customer_id);
+        if($result) {
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Customer activate successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('customers/customer');
+        }
+
+        else {
+            redirect('customers/customer');
+        }
+    }
+
+    public function inactive_customer() {
+        $customer_id = $this->input->get('id');
+        $result = $this->CustomerModel->inactive($customer_id);
+        if($result) {
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Customer inactivate successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('customers/customer');
+        }
+
+        else {
+            redirect('customers/customer');
+        }
+    }
 }

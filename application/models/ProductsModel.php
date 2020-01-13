@@ -10,6 +10,16 @@ Class ProductsModel extends CI_Model {
         return $query->result();
     }
 
+	public function active_products() {
+		$this->db->select('product.*, product_category.name as category, unit_of_measures.unit as uom');
+		$this->db->from('product');
+		$this->db->join('product_category', 'product_category.id = product.product_category_id');
+		$this->db->join('unit_of_measures', 'unit_of_measures.id = product.unit_of_measures_id');
+		$this->db->where('product.active', 1);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
     public function create($new_product) {
         $this->db->insert('product', $new_product);
 		if ($this->db->affected_rows() == 1) {
@@ -61,6 +71,28 @@ Class ProductsModel extends CI_Model {
 		$this->db->limit(1);
 		$query = $this->db->get();
 		return $query->result();
+	}
+
+	public function active($product_id) {
+		$this->db->where('id', $product_id);
+		$this->db->update('product', array('active' => 1));
+		if ($this->db->affected_rows() == 1) {
+			return true;;
+		}
+		else {
+			return false;;
+		}
+	}
+
+	public function inactive($product_id) {
+		$this->db->where('id', $product_id);
+		$this->db->update('product', array('active' => 0));
+		if ($this->db->affected_rows() == 1) {
+			return true;;
+		}
+		else {
+			return false;;
+		}
 	}
 }
 

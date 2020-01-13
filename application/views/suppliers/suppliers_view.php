@@ -157,8 +157,9 @@
 								<th>Address</th>
 								<th>Phone</th>
 								<th>Email</th>
+                                <th class="text-center">Status</th>
 								<th>Create Date</th>
-								<th width="15%"></th>
+								<th width="20%"></th>
 							</tr>
 							</thead>
 
@@ -176,8 +177,20 @@
 									</td>
 									<td><?php echo $supplier->phone; ?></td>
 									<td><?php echo $supplier->email; ?></td>
+                                    <td class="text-center">
+                                        <?php if($supplier->active == true) { ?>
+                                            <span class="label label-success">Active</span>
+                                        <?php } else { ?>
+                                            <span class="label label-danger">Inactive</span>
+                                        <?php } ?>
+                                    </td>
 									<td><?php echo $supplier->create_date; ?></td>
 									<td class="text-center">
+                                        <?php if($supplier->active == true) { ?>
+                                            <a href="<?php echo base_url(); ?>customers/customer/inactive_customer?id=<?php echo $supplier->id; ?>" class="btn btn-default btn-sm">Inactive</a>
+                                        <?php } else { ?>
+                                            <a href="<?php echo base_url(); ?>customers/customer/active_customer?id=<?php echo $supplier->id; ?>" class="btn btn-default btn-sm">Active</a>
+                                        <?php } ?>
 										<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#update_customer_modal<?php echo $supplier->id; ?>">Update</button>
 										<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_supplier_modal<?php echo $supplier->id; ?>">Delete</button>
 									</td>
