@@ -45,7 +45,7 @@
 								<th>Email</th>
                                 <th class="text-center">Status</th>
 								<th>Create Date</th>
-								<th width="20%"></th>
+								<th width="15%"></th>
 							</tr>
 							</thead>
 
@@ -65,18 +65,13 @@
 									<td><?php if($customer->email) { echo $customer->email; } else { echo '-';} ?></td>
                                     <td class="text-center">
                                         <?php if($customer->active == true) { ?>
-                                            <span class="label label-success">Active</span>
+											<a href="<?php echo base_url(); ?>customers/customer/inactive_customer?id=<?php echo $customer->id; ?>"><span class="label label-success">Active</span></a>
                                         <?php } else { ?>
-                                            <span class="label label-danger">Inactive</span>
+											<a href="<?php echo base_url(); ?>customers/customer/active_customer?id=<?php echo $customer->id; ?>"><span class="label label-danger">Inactive</span></a>
                                         <?php } ?>
                                     </td>
 									<td><?php echo $customer->create_date; ?></td>
 									<td class="text-center">
-                                        <?php if($customer->active == true) { ?>
-                                            <a href="<?php echo base_url(); ?>customers/customer/inactive_customer?id=<?php echo $customer->id; ?>" class="btn btn-default btn-sm">Inactive</a>
-                                        <?php } else { ?>
-                                            <a href="<?php echo base_url(); ?>customers/customer/active_customer?id=<?php echo $customer->id; ?>" class="btn btn-default btn-sm">Active</a>
-                                        <?php } ?>
 										<button class="btn btn-primary btn-sm" id="update_customer" data-id="<?php echo $customer->id; ?>">Update</button>
 										<button class="btn btn-danger btn-sm" id="delete_customer" data-id="<?php echo $customer->id; ?>">Delete</button>
 									</td>
