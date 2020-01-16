@@ -35,8 +35,8 @@ class Customer extends CI_Controller {
 
     public function create_customer() {
 		$new_customer = array(
+		    'customer_type' => $this->input->post('customer_type'),
 			'first_name' => $this->input->post('first_name'),
-			'last_name' => $this->input->post('last_name'),
 			'street_one' => $this->input->post('street_one'),
 			'street_two' => $this->input->post('street_two'),
 			'city' => $this->input->post('city'),
@@ -46,6 +46,10 @@ class Customer extends CI_Controller {
 			'email' => $this->input->post('email'),
 			'create_date' => date("Y-m-d"),
 		);
+
+		if($new_customer['customer_type'] == 'person') {
+		    $new_customer['last_name'] = $this->input->post('last_name');
+        }
 
 		$result = $this->CustomerModel->create($new_customer);
 
@@ -72,8 +76,8 @@ class Customer extends CI_Controller {
     	$customer_id = $this->input->post('id');
 
 		$new_values = array(
+            'customer_type' => $this->input->post('customer_type'),
 			'first_name' => $this->input->post('first_name'),
-			'last_name' => $this->input->post('last_name'),
 			'street_one' => $this->input->post('street_one'),
 			'street_two' => $this->input->post('street_two'),
 			'city' => $this->input->post('city'),
@@ -82,6 +86,10 @@ class Customer extends CI_Controller {
 			'phone' => $this->input->post('phone'),
 			'email' => $this->input->post('email'),
 		);
+
+        if($new_values['customer_type'] == 'person') {
+            $new_values['last_name'] = $this->input->post('last_name');
+        }
 
 		$result = $this->CustomerModel->update($customer_id, $new_values);
 

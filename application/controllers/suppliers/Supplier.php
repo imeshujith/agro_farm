@@ -36,6 +36,7 @@ class Supplier extends CI_Controller {
 	public function create_supplier() {
 
 		$new_supplier = array(
+			'supplier_type' => $this->input->post('supplier_type'),
 			'first_name' => $this->input->post('first_name'),
 			'last_name' => $this->input->post('last_name'),
 			'street_one' => $this->input->post('street_one'),
@@ -47,6 +48,10 @@ class Supplier extends CI_Controller {
 			'email' => $this->input->post('email'),
 			'create_date' => date("Y-m-d"),
 		);
+
+        if($new_supplier['supplier_type'] == 'person') {
+            $new_supplier['last_name'] = $this->input->post('last_name');
+        }
 
 		$result = $this->SupplierModel->create($new_supplier);
 
@@ -64,6 +69,7 @@ class Supplier extends CI_Controller {
 		$supplier_id = $this->input->post('id');
 
 		$new_values = array(
+            'supplier_type' => $this->input->post('supplier_type'),
 			'first_name' => $this->input->post('first_name'),
 			'last_name' => $this->input->post('last_name'),
 			'street_one' => $this->input->post('street_one'),
@@ -74,6 +80,10 @@ class Supplier extends CI_Controller {
 			'phone' => $this->input->post('phone'),
 			'email' => $this->input->post('email'),
 		);
+
+        if($new_values['supplier_type'] == 'person') {
+            $new_values['last_name'] = $this->input->post('last_name');
+        }
 
 		$result = $this->SupplierModel->update($supplier_id, $new_values);
 
