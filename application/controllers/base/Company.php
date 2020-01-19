@@ -43,12 +43,6 @@ class Company extends CI_Controller {
     }
 
     public function update() {
-        // validate compnay details form
-        $this->form_validation->set_rules('company_name', 'Company Name', 'trim|required');
-        $this->form_validation->set_rules('company_street', 'Street', 'trim|required');
-        $this->form_validation->set_rules('company_phone', 'Phone Number', 'trim|required|min_length[9]|max_length[13]');
-        $this->form_validation->set_rules('company_mobile', 'Mobile Number', 'trim|required|min_length[9]|max_length[13]');
-        $this->form_validation->set_rules('company_email', 'Email', 'trim|required|valid_email');
 
         // define upload image configurations
         $config['upload_path'] = 'assets/images/company/';

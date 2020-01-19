@@ -325,7 +325,7 @@
 							</tr>
 							</thead>
 
-							<tbody id="supplier_table">
+							<tbody id="suppliers_table">
 							<?php
 							foreach ($suppliers as $supplier) { ?>
 								<tr>
@@ -373,65 +373,65 @@
                 dataType: 'json',
                 data: {id: id},
                 success: function (response) {
-                    if(response[0]['customer_type'] == 'person') {
-                        $('#update_customer_person').prop( "checked", true );
-                        $('#update_customer_label').text('First Name');
+                    if(response[0]['update_supplier_type'] == 'person') {
+                        $('#update_supplier_person').prop( "checked", true );
+                        $('#update_supplier_label').text('First Name');
                         $('#update_last_name').show();
                     }
                     else {
-                        $('#update_customer_company').prop( "checked", true );
-                        $('#update_customer_label').text('Company Name');
+                        $('#update_supplier_company').prop( "checked", true );
+                        $('#update_supplier_label').text('Company Name');
                         $('#update_last_name').hide();
                     }
 
-                    $('#update_customer_id').val(response[0]['id']);
-                    $('#update_customer_first_name').val(response[0]['first_name']);
-                    $('#update_customer_last_name').val(response[0]['last_name']);
-                    $('#update_customer_street_one').val(response[0]['street_one']);
-                    $('#update_customer_street_two').val(response[0]['street_two']);
-                    $('#update_customer_city').val(response[0]['city']).change();
-                    $('#update_customer_phone').val(response[0]['phone']);
-                    $('#update_customer_email').val(response[0]['email']);
-                    $('#update_customer_modal').modal('show');
+                    $('#update_supplier_id').val(response[0]['id']);
+                    $('#update_supplier_first_name').val(response[0]['first_name']);
+                    $('#update_supplier_last_name').val(response[0]['last_name']);
+                    $('#update_supplier_street_one').val(response[0]['street_one']);
+                    $('#update_supplier_street_two').val(response[0]['street_two']);
+                    $('#update_supplier_city').val(response[0]['city']).change();
+                    $('#update_supplier_phone').val(response[0]['phone']);
+                    $('#update_supplier_email').val(response[0]['email']);
+                    $('#update_supplier_modal').modal('show');
                 },
             });
         })
 
-        $('#customer_table').on('click', '#delete_customer', function() {
+        $('#suppliers_table').on('click', '#delete_customer', function() {
             var id = $(this).attr('data-id');
             $.ajax({
                 type: 'post',
-                url: base_url + 'customers/customer/get_single_item',
+                url: base_url + 'suppliers/supplier/get_single_item',
                 async: false,
                 dataType: 'json',
                 data: {id: id},
                 success: function (response) {
-                    $('#delete_customer_id').val(response[0]['id']);
-                    $('#delete_customer_modal').modal('show');
+                    $('#delete_supplier_id').val(response[0]['id']);
+                    $('#delete_supplier_modal').modal('show');
                 },
             });
         })
 
-        $('input[name=customer_type]').change(function(){
+        $('input[name=supplier_type]').change(function(){
             var value = $(this).val();
             if(value == 'person') {
-                $('#customer_label').text('First Name');
+                $('#supplier_label').text('First Name');
                 $('#last_name').show();
             }
             if(value == 'company') {
-                $('#customer_label').text('Company Name');
+                $('#supplier_label').text('Company Name');
                 $('#last_name').hide();
             }
         });
 
-        $('input[name=customer_type]').change(function(){
+        $('input[name=supplier_type]').change(function(){
             var value = $(this).val();
             if(value == 'person') {
-                $('#update_customer_label').text('First Name');
+                $('#update_supplier_label').text('First Name');
                 $('#update_last_name').show();
             }
             if(value == 'company') {
-                $('#update_customer_label').text('Company Name');
+                $('#update_supplier_label').text('Company Name');
                 $('#update_last_name').hide();
             }
         });

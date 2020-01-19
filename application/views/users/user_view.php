@@ -75,26 +75,27 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="first_name">First Name</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name"
+										<input type="hidden" name="id" id="update_id"/>
+                                        <input type="text" class="form-control" id="update_first_name" name="first_name"
                                                placeholder="First Name" data-validation="required">
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="last_name">Last Name</label>
-                                        <input type="text" class="form-control" id="last_name" name="last_name"
+                                        <input type="text" class="form-control" id="update_last_name" name="last_name"
                                                placeholder="Last Name" data-validation="required">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="email" name="email"
+                                <input type="email" class="form-control" id="update_email" name="email"
                                        placeholder="Enter email" data-validation="email">
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="first_name">User Type</label>
-                                        <select name="user_type" class="form-control" data-validation="required">
+                                        <select name="user_type" id="update_user_type" class="form-control" data-validation="required">
                                             <option disabled selected>Select one</option>
                                             <option value="Admin">Admin</option>
                                             <option value="Inventory Manager">Inventory Manager</option>
@@ -106,7 +107,6 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="user_id"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" id="button_close" data-dismiss="modal">Close</button>
@@ -159,8 +159,8 @@
                                     <th>User Type</th>
                                     <th>Status</th>
                                     <th>Last Login</th>
-                                    <th>Create Date</th>
-                                    <th>Edit Date</th>
+									<th class="text-center">Status</th>
+                                    <th class="text-center">Create Date</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                                 </thead>
@@ -173,14 +173,15 @@
                                     <td><?php echo $user->user_type; ?></td>
                                     <td><?php echo $user->active; ?></td>
                                     <td><?php echo $user->last_login; ?></td>
-                                    <td><?php echo $user->create_date; ?></td>
-                                    <td><?php echo $user->edit_date; ?></td>
-                                    <td>
-                                        <?php if($user->active == true) { ?>
-                                            <a href="<?php base_url(); ?>users/inactive_user?id=<?php echo $user->id; ?>" class="btn btn-danger btn-xs">Inactive</a>
-                                        <?php } else { ?>
-                                            <a href="<?php base_url(); ?>users/active_user?id=<?php echo $user->id; ?>" class="btn btn-success btn-xs">Active</a>
-                                        <?php } ?>
+									<td class="text-center">
+										<?php if($user->active == true) { ?>
+											<a href="<?php base_url(); ?>users/inactive_user?id=<?php echo $user->id; ?>"><span class="label label-success">Active</span></a>
+										<?php } else { ?>
+											<a href="<?php base_url(); ?>users/active_user?id=<?php echo $user->id; ?>"><span class="label label-danger">Inactive</span></a>
+										<?php } ?>
+									</td>
+                                    <td class="text-center"><?php echo $user->create_date; ?></td>
+                                    <td class="text-center">
                                         <button class="btn btn-primary btn-xs" data-id="<?php echo $user->id; ?>">Update</button>
                                         <button class="btn btn-danger btn-xs" data-id="<?php echo $user->id; ?>">Delete</button>
                                     </td>
@@ -195,3 +196,57 @@
     </section>
     <!-- end content -->
 </div>
+
+<script>
+	$(document).ready(function() {
+		$('#users_table').on('click', '#update_users', function() {
+			var id = $(this).attr('data-id');
+			$.ajax({
+				type: 'post',
+				url: base_url + 'users/users/get_single_item',
+				async: false,
+				dataType: 'json',
+				data: {id: id},
+				success: function (response) {
+					if(response[0]['customer_type'] == 'person') {
+						$('#update_customer_person').prop( "checked", true );
+						$('#update_customer_label').text('First Name');
+						$('#update_last_name').show();
+					}
+					else {
+						$('#update_customer_company').prop( "checked", true );
+						$('#update_customer_label').text('Company Name');
+						$('#update_last_name').hide();
+					}
+
+					$('#update_customer_id').val(response[0]['id']);
+					$('#update_customer_first_name').val(response[0]['first_name']);
+					$('#update_customer_last_name').val(response[0]['last_name']);
+					$('#update_customer_street_one').val(response[0]['street_one']);
+					$('#update_customer_street_two').val(response[0]['street_two']);
+					$('#update_customer_city').val(response[0]['city']).change();
+					$('#update_customer_phone').val(response[0]['phone']);
+					$('#update_customer_email').val(response[0]['email']);
+					$('#update_customer_modal').modal('show');
+				},
+			});
+		})
+
+		$('#customer_table').on('click', '#delete_customer', function() {
+			var id = $(this).attr('data-id');
+			$.ajax({
+				type: 'post',
+				url: base_url + 'customers/customer/get_single_item',
+				async: false,
+				dataType: 'json',
+				data: {id: id},
+				success: function (response) {
+					$('#delete_customer_id').val(response[0]['id']);
+					$('#delete_customer_modal').modal('show');
+				},
+			});
+		})
+	});
+
+</script>
+
