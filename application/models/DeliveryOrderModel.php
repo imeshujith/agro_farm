@@ -13,10 +13,9 @@ Class DeliveryOrderModel extends CI_Model {
     }
 
     public function list_all() {
-        $this->db->select("delivery_order.*, customers.first_name as first_name, customers.last_name as last_name, customers.city as customer_city, delivery_persons.name as person");
+        $this->db->select("delivery_order.*, customers.first_name as first_name, customers.last_name as last_name, customers.city as customer_city");
         $this->db->from('delivery_order');
         $this->db->join('customers', 'customers.id = delivery_order.customers_id');
-        $this->db->join('delivery_persons', 'delivery_persons.id = delivery_order.delivery_persons_id');
         $query = $this->db->get();
         return $query->result();
     }

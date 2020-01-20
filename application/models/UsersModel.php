@@ -69,10 +69,10 @@ Class UsersModel extends CI_Model {
     }
 
     // return edit user details to contoller
-    public function edit_user($edit_user_id) {
+    public function single_item($edit_user_id) {
         $this->db->where('id', $edit_user_id);
         $query = $this->db->get('users');
-        return $query->row();
+        return $query->result();
     }
 
     // update exsisting user details from databse

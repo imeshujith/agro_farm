@@ -20,7 +20,7 @@
 		</script>
 	<?php } ?>
 
-	<!-- add new customer modal -->
+	<!-- add new supplier modal -->
 	<div class="modal fade" tabindex="-1" role="dialog" id="add_customer_modal">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -52,7 +52,7 @@
 									</div>
 
 									<div class="col-lg-6">
-										<div class="form-group" id="last_name">
+										<div class="form-group" id="supplier_last_name">
 											<label>Last Name</label>
 											<input type="text" class="form-control" name="last_name" data-validation="required">
 										</div>
@@ -145,7 +145,7 @@
 			</div>
 		</div>
 	</div>
-    <!-- add new customer modal end -->
+    <!-- add new supplier modal end -->
 
     <!--supplier update modal-->
     <div class="modal fade" tabindex="-1" role="dialog" id="update_customer_modal">
@@ -325,7 +325,7 @@
 							</tr>
 							</thead>
 
-							<tbody id="suppliers_table">
+							<tbody id="supplier_table">
 							<?php
 							foreach ($suppliers as $supplier) { ?>
 								<tr>
@@ -360,6 +360,7 @@
 			</div>
 		</div>
 	</section>
+    <!-- end Main content -->
 </div>
 
 <script>
@@ -373,7 +374,7 @@
                 dataType: 'json',
                 data: {id: id},
                 success: function (response) {
-                    if(response[0]['update_supplier_type'] == 'person') {
+                    if(response[0]['supplier_type'] == 'person') {
                         $('#update_supplier_person').prop( "checked", true );
                         $('#update_supplier_label').text('First Name');
                         $('#update_last_name').show();
@@ -397,7 +398,7 @@
             });
         })
 
-        $('#suppliers_table').on('click', '#delete_customer', function() {
+        $('#supplier_table').on('click', '#delete_supplier', function() {
             var id = $(this).attr('data-id');
             $.ajax({
                 type: 'post',
@@ -416,11 +417,11 @@
             var value = $(this).val();
             if(value == 'person') {
                 $('#supplier_label').text('First Name');
-                $('#last_name').show();
+                $('#supplier_last_name').show();
             }
             if(value == 'company') {
                 $('#supplier_label').text('Company Name');
-                $('#last_name').hide();
+                $('#supplier_last_name').hide();
             }
         });
 
@@ -428,11 +429,11 @@
             var value = $(this).val();
             if(value == 'person') {
                 $('#update_supplier_label').text('First Name');
-                $('#update_last_name').show();
+                $('#update_supplier_ln').show();
             }
             if(value == 'company') {
                 $('#update_supplier_label').text('Company Name');
-                $('#update_last_name').hide();
+                $('#update_supplier_ln').hide();
             }
         });
 
@@ -481,7 +482,6 @@
 			});
 		});
 	});
-
 </script>
 
 

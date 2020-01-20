@@ -41,16 +41,16 @@
 
 							<div class="col-md-6 text-right">
 								<div class="form-group">
-									<label class="control-label col-sm-4" >Schedule Date:</label>
+									<label class="control-label col-sm-4" style="margin-bottom: 5px;">Schedule Date:</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control" name="scheduled_date" id="datepicker" placeholder="yyyy/mm/dd" value="<?php echo $order[0]->scheduled_date; ?>" required <?php if($order[0]->status != 'Draft') { echo "readonly"; } ?>>
+										<input type="text" class="form-control" name="scheduled_date" id="datepicker" placeholder="yyyy/mm/dd" value="<?php echo $order[0]->scheduled_date; ?>" required <?php if($order[0]->status != 'Draft') { echo "readonly"; } ?> style="margin-bottom: 5px;">
 									</div>
 								</div>
 
 								<div class="form-group">
-									<label class="control-label col-sm-4">Delivery Person:</label>
+									<label class="control-label col-sm-4" style="margin-bottom: 5px;">Delivery Person:</label>
 									<div class="col-sm-8">
-										<select class="form-control" name="delivery_person" data-validation="required" <?php if($order[0]->status != 'Draft') { echo "readonly"; } ?>>
+										<select class="form-control" name="delivery_person" data-validation="required" <?php if($order[0]->status != 'Draft') { echo "readonly"; } ?> style="margin-bottom: 5px;">
 											<option selected disabled>Select Delivery Person</option>
 											<?php
 											foreach ($persons as $person) { ?>
@@ -61,16 +61,16 @@
 								</div>
 
 								<div class="form-group">
-									<label class="control-label col-sm-4">Shipped Date:</label>
+									<label class="control-label col-sm-4" style="margin-bottom: 5px;">Shipped Date:</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control" name="shipped_date" value="<?php echo $order[0]->shipped_date; ?>" readonly>
+										<input type="text" class="form-control" name="shipped_date" value="<?php echo $order[0]->shipped_date; ?>" readonly style="margin-bottom: 5px;">
 									</div>
 								</div>
 
 								<div class="form-group">
-									<label class="control-label col-sm-4">Completed Date:</label>
+									<label class="control-label col-sm-4" style="margin-bottom: 5px;">Completed Date:</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control" name="completed_date" value="<?php echo $order[0]->delivered_date; ?>" readonly>
+										<input type="text" class="form-control" name="completed_date" value="<?php echo $order[0]->delivered_date; ?>" readonly style="margin-bottom: 5px;">
 									</div>
 								</div>
 							</div>
@@ -108,7 +108,9 @@
 						</form>
 					</div>
 					<div class="box-footer">
-						<a href="<?php echo base_url(); ?>delivery/delivery/print_order?id=<?php echo $order[0]->id; ?>" target="_blank" class="btn btn-default"><i class="fa fa-print" aria-hidden="true"></i> Print DO</a>
+						<?php if($order[0]->status != 'Draft') { ?>
+                            <a href="<?php echo base_url(); ?>delivery/delivery/print_order?id=<?php echo $order[0]->id; ?>" target="_blank" class="btn btn-default"><i class="fa fa-print" aria-hidden="true"></i> Print DO</a>
+                        <?php } ?>
 					</div>
 				</div>
 			</div>

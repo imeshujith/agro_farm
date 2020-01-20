@@ -65,6 +65,15 @@ class Supplier extends CI_Controller {
 		}
 	}
 
+    public function get_single_item() {
+        $supplier_id = $this->input->post('id');
+
+        $result = $this->SupplierModel->single_item($supplier_id);
+        if($result == true) {
+            echo json_encode($result);
+        }
+    }
+
 	public function update_supplier() {
 		$supplier_id = $this->input->post('id');
 

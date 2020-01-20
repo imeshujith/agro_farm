@@ -1,5 +1,27 @@
 <div class="content-wrapper">
-    <!-- user modal-->
+    <!--alert message-->
+    <?php if($this->session->flashdata('alert')) { ?>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.notify({
+                        message: '<?php echo $this->session->flashdata('alert')['message']?>'
+                    },
+                    {
+                        type: '<?php echo $this->session->flashdata('alert')['type']?>',
+                        placement: {
+                            from: "bottom",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated fadeInDown',
+                            exit: 'animated fadeOutUp'
+                        },
+                    });
+            });
+        </script>
+    <?php } ?>
+
+    <!-- user create modal-->
     <div class="modal fade" tabindex="-1" role="dialog" id="create_user_modal">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -7,10 +29,7 @@
                     <h4 class="modal-title">Create New User</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-danger alert-dismissible" role="alert" id="user_error">
-                        <span id="error_message"></span>
-                    </div>
-                    <form role="form" action="" method="post" id="user_form">
+                    <form role="form" action="<?php echo base_url('users/users/create_user') ?>" method="post">
                         <div class="box-body">
                             <div class="form-group">
                                 <div class="row">
@@ -50,13 +69,14 @@
                         <input type="hidden" name="user_id"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="button_close" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" id="button_save">Save</button>
+                    <button type="reset" class="btn btn-default">Reset</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                 </div>
                 </form>
             </div>
         </div>
     </div>
+    <!-- end user create modal-->
 
     <!--user update modal-->
     <div class="modal fade" tabindex="-1" role="dialog" id="update_user_modal">
@@ -66,16 +86,13 @@
                     <h4 class="modal-title">Create New User</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-danger alert-dismissible" role="alert" id="user_error">
-                        <span id="error_message"></span>
-                    </div>
                     <form role="form" action="" method="post" id="user_form">
                         <div class="box-body">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="first_name">First Name</label>
-										<input type="hidden" name="id" id="update_id"/>
+										<input type="hidden" name="id" id="update_user_id"/>
                                         <input type="text" class="form-control" id="update_first_name" name="first_name"
                                                placeholder="First Name" data-validation="required">
                                     </div>
@@ -109,8 +126,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="button_close" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" id="button_save">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save</button>
                 </div>
                 </form>
             </div>
@@ -128,8 +145,11 @@
                     <span>Are you sure want to delete this user ?</span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" id="button_delete">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> No </button>
+                    <form action="<?php echo base_url('users/users/delete_user') ?>" method="post" style="display: inline;">
+                        <input type="hidden" name="id" id="delete_customer_id"/>
+                        <button type="submit" class="btn btn-danger"> Yes </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -145,7 +165,7 @@
                             Users
                         </h3>
                         <div class="pull-right">
-                            <button class="pull-right btn btn-success" data-toggle="modal" data-target="create_user_modal"><i class="fa fa-user-plus"></i> Create New User</button>
+                            <button class="pull-right btn btn-success" data-toggle="modal" data-target="#create_user_modal"><i class="fa fa-user-plus"></i> Create New User</button>
                         </div>
                     </div>
                     <div class="box-body">
@@ -157,7 +177,6 @@
                                     <th>Full Name</td>
                                     <th>Email</th>
                                     <th>User Type</th>
-                                    <th>Status</th>
                                     <th>Last Login</th>
 									<th class="text-center">Status</th>
                                     <th class="text-center">Create Date</th>
@@ -167,24 +186,25 @@
 
                                 <tbody id="system_users">
                                 <?php foreach ($users as $user) { ?>
-                                    <td><?php echo $user->id; ?></td>
-                                    <td><?php echo $user->first_name.' '.$user->last_name; ?></td>
-                                    <td><?php echo $user->email; ?></td>
-                                    <td><?php echo $user->user_type; ?></td>
-                                    <td><?php echo $user->active; ?></td>
-                                    <td><?php echo $user->last_login; ?></td>
-									<td class="text-center">
-										<?php if($user->active == true) { ?>
-											<a href="<?php base_url(); ?>users/inactive_user?id=<?php echo $user->id; ?>"><span class="label label-success">Active</span></a>
-										<?php } else { ?>
-											<a href="<?php base_url(); ?>users/active_user?id=<?php echo $user->id; ?>"><span class="label label-danger">Inactive</span></a>
-										<?php } ?>
-									</td>
-                                    <td class="text-center"><?php echo $user->create_date; ?></td>
-                                    <td class="text-center">
-                                        <button class="btn btn-primary btn-xs" data-id="<?php echo $user->id; ?>">Update</button>
-                                        <button class="btn btn-danger btn-xs" data-id="<?php echo $user->id; ?>">Delete</button>
-                                    </td>
+                                    <tr>
+                                        <td>EMP<?php echo $user->id; ?></td>
+                                        <td><?php echo $user->first_name.' '.$user->last_name; ?></td>
+                                        <td><?php echo $user->email; ?></td>
+                                        <td><?php echo $user->user_type; ?></td>
+                                        <td><?php echo $user->last_login; ?></td>
+                                        <td class="text-center">
+                                            <?php if($user->active == true) { ?>
+                                                <a href="<?php base_url(); ?>users/inactive_user?id=<?php echo $user->id; ?>"><span class="label label-success">Active</span></a>
+                                            <?php } else { ?>
+                                                <a href="<?php base_url(); ?>users/active_user?id=<?php echo $user->id; ?>"><span class="label label-danger">Inactive</span></a>
+                                            <?php } ?>
+                                        </td>
+                                        <td class="text-center"><?php echo $user->create_date; ?></td>
+                                        <td class="text-center">
+                                            <button class="btn btn-primary btn-xs" id="update_user" data-id="<?php echo $user->id; ?>">Update</button>
+                                            <button class="btn btn-danger btn-xs" id="delete_user" data-id="<?php echo $user->id; ?>">Delete</button>
+                                        </td>
+                                    </tr>
                                 <?php } ?>
                                 </tbody>
                             </table>
@@ -199,7 +219,7 @@
 
 <script>
 	$(document).ready(function() {
-		$('#users_table').on('click', '#update_users', function() {
+		$('#system_users').on('click', '#update_user', function() {
 			var id = $(this).attr('data-id');
 			$.ajax({
 				type: 'post',
@@ -208,41 +228,27 @@
 				dataType: 'json',
 				data: {id: id},
 				success: function (response) {
-					if(response[0]['customer_type'] == 'person') {
-						$('#update_customer_person').prop( "checked", true );
-						$('#update_customer_label').text('First Name');
-						$('#update_last_name').show();
-					}
-					else {
-						$('#update_customer_company').prop( "checked", true );
-						$('#update_customer_label').text('Company Name');
-						$('#update_last_name').hide();
-					}
-
-					$('#update_customer_id').val(response[0]['id']);
-					$('#update_customer_first_name').val(response[0]['first_name']);
-					$('#update_customer_last_name').val(response[0]['last_name']);
-					$('#update_customer_street_one').val(response[0]['street_one']);
-					$('#update_customer_street_two').val(response[0]['street_two']);
-					$('#update_customer_city').val(response[0]['city']).change();
-					$('#update_customer_phone').val(response[0]['phone']);
-					$('#update_customer_email').val(response[0]['email']);
-					$('#update_customer_modal').modal('show');
+					$('#update_user_id').val(response[0]['id']);
+					$('#update_first_name').val(response[0]['first_name']);
+					$('#update_last_name').val(response[0]['last_name']);
+					$('#update_email').val(response[0]['email']);
+					$('#update_user_type').val(response[0]['user_type']).change();
+					$('#update_user_modal').modal('show');
 				},
 			});
 		})
 
-		$('#customer_table').on('click', '#delete_customer', function() {
+		$('#system_users').on('click', '#delete_user', function() {
 			var id = $(this).attr('data-id');
 			$.ajax({
 				type: 'post',
-				url: base_url + 'customers/customer/get_single_item',
+				url: base_url + 'users/users/get_single_item',
 				async: false,
 				dataType: 'json',
 				data: {id: id},
 				success: function (response) {
 					$('#delete_customer_id').val(response[0]['id']);
-					$('#delete_customer_modal').modal('show');
+					$('#user_delete_modal').modal('show');
 				},
 			});
 		})

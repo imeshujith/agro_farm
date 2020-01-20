@@ -35,10 +35,10 @@
 						<table class="table table-bordered table-striped data_tables">
 							<thead>
 							<tr>
-								<td>Name</td>
-								<td>Standard Unit</td>
-								<td>Create Date</td>
-								<td class="text-center"></td>
+								<th>Name</th>
+								<th>Standard Unit</th>
+								<th>Create Date</th>
+								<th class="text-center"></th>
 							</tr>
 							</thead>
 							<tbody id="uom_table">

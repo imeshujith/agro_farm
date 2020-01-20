@@ -14,6 +14,12 @@ Class SupplierModel extends CI_Model {
 		return $query->result();
 	}
 
+	public function single_item($supplier_id) {
+		$this->db->where('id', $supplier_id);
+		$query = $this->db->get('suppliers');
+		return $query->result();
+	}
+
 
 	public function create($new_supplier) {
 		$this->db->insert('suppliers', $new_supplier);

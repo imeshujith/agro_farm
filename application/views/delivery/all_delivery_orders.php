@@ -16,7 +16,6 @@
                                 <th>Order Number</th>
                                 <th>Customer</th>
                                 <th>City</th>
-                                <th>Delivery Person</th>
                                 <th>Schedule Date</th>
                                 <th>Shipped Date</th>
                                 <th>Delivery Date</th>
@@ -29,7 +28,6 @@
 									<td><?php echo $order->number.' '.$order->id; ?></td>
 									<td><?php echo $order->first_name.' '.$order->last_name; ?></td>
 									<td><?php echo  $order->customer_city; ?></td>
-									<td><?php echo  $order->person; ?></td>
 									<td><?php if($order->scheduled_date) {echo  $order->scheduled_date;} else {echo 'N/A';} ?></td>
 									<td><?php if($order->shipped_date) {echo  $order->shipped_date;} else {echo 'N/A';} ?></td>
 									<td><?php if($order->delivered_date) {echo  $order->delivered_date;} else {echo 'N/A';} ?></td>

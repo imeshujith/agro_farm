@@ -351,7 +351,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal"> No </button>
                         <form action="<?php echo base_url('customers/customer/delete_customer') ?>" method="post" style="display: inline;">
-                            <input type="hidden" value="<?php echo $customer->id; ?>" name="id" id="delete_customer_id"/>
+                            <input type="hidden" name="id" id="delete_customer_id"/>
                             <button type="submit" class="btn btn-danger"> Yes </button>
                         </form>
                     </div>
