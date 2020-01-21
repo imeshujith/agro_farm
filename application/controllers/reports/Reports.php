@@ -31,7 +31,11 @@ class Reports extends CI_Controller {
 			$data['title'] = $from_date.' - '.$to_date.' Income Report - '.$company[0]->name;
 		}
 
-		$this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
 		$this->load->view('reports/income_report', $data);
 		$this->load->view("footer");
 	}
@@ -54,7 +58,11 @@ class Reports extends CI_Controller {
 			$data['title'] = $from_date.' - '.$to_date.' Expense Report - '.$company[0]->name;
 		}
 
-		$this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
 		$this->load->view('reports/expense_report', $data);
 		$this->load->view("footer");
 	}
@@ -76,7 +84,11 @@ class Reports extends CI_Controller {
 			$data['title'] = 'Current Stock Report - '.$company[0]->name;
 		}
 
-		$this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
 		$this->load->view('reports/stock_report', $data);
 		$this->load->view("footer");
 	}
@@ -97,7 +109,11 @@ class Reports extends CI_Controller {
 			$data['title'] = $from_date.' - '.$to_date.' Delivery Report - '.$company[0]->name;
 		}
 
-		$this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
 		$this->load->view('reports/delivery_report', $data);
 		$this->load->view("footer");
 	}
@@ -123,7 +139,11 @@ class Reports extends CI_Controller {
             $data['title'] = $year.' Income and Expense Report - '.$company[0]->name;
         }
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('reports/yearly_income_expense_report', $data);
         $this->load->view("footer");
     }
@@ -150,7 +170,11 @@ class Reports extends CI_Controller {
             $data['title'] = $year.'/'.$month.' Income and Expense Report - '.$company[0]->name;
         }
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('reports/monthly_income_expense_report', $data);
         $this->load->view("footer");
     }

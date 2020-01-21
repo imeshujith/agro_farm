@@ -329,7 +329,7 @@
 							<?php
 							foreach ($suppliers as $supplier) { ?>
 								<tr>
-									<td><?php echo "SUP".sprintf("%04d", $supplier->id); ?></td>
+									<td><?php echo "SUP".$supplier->id; ?></td>
 									<td><?php echo $supplier->first_name." ". $supplier->last_name; ?></td>
 									<td>
 										<?php

@@ -26,11 +26,15 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create New User</h4>
                 </div>
                 <div class="modal-body">
                     <form role="form" action="<?php echo base_url('users/users/create_user') ?>" method="post">
                         <div class="box-body">
+                            <div class="alert alert-danger"  id="email_duplicate_alert" style="display: none;">
+                                <strong>Warning!</strong> The entered Email address already exist in the system
+                            </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -69,8 +73,8 @@
                         <input type="hidden" name="user_id"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-default">Reset</button>
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-default" id="button_create_reset">Reset</button>
+                    <button type="submit" class="btn btn-success" id="button_create_save">Save</button>
                 </div>
                 </form>
             </div>
@@ -83,10 +87,14 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Create New User</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update User</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" action="" method="post" id="user_form">
+                    <form role="form" action="<?php echo base_url('users/users/update_user') ?>" method="post">
+                        <div class="alert alert-danger" id="email_update_duplicate_alert" style="display: none;">
+                            <strong>Warning!</strong> The entered Email address already exist in the system
+                        </div>
                         <div class="box-body">
                             <div class="form-group">
                                 <div class="row">
@@ -105,6 +113,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
+                                <input type="hidden" id="fixed_email"/>
                                 <input type="email" class="form-control" id="update_email" name="email"
                                        placeholder="Enter email" data-validation="email">
                             </div>
@@ -126,8 +135,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="button_update_close">Close</button>
+                    <button type="submit" class="btn btn-success" id="button_update_save">Save</button>
                 </div>
                 </form>
             </div>
@@ -139,6 +148,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Warrning!</h4>
                 </div>
                 <div class="modal-body">
@@ -165,7 +175,7 @@
                             Users
                         </h3>
                         <div class="pull-right">
-                            <button class="pull-right btn btn-success" data-toggle="modal" data-target="#create_user_modal"><i class="fa fa-user-plus"></i> Create New User</button>
+                            <button class="pull-right btn btn-success" data-toggle="modal" data-target="#create_user_modal" id="create_user_btn"><i class="fa fa-user-plus"></i> Create New User</button>
                         </div>
                     </div>
                     <div class="box-body">
@@ -220,6 +230,7 @@
 <script>
 	$(document).ready(function() {
 		$('#system_users').on('click', '#update_user', function() {
+            $('#email_update_duplicate_alert').hide();
 			var id = $(this).attr('data-id');
 			$.ajax({
 				type: 'post',
@@ -232,11 +243,73 @@
 					$('#update_first_name').val(response[0]['first_name']);
 					$('#update_last_name').val(response[0]['last_name']);
 					$('#update_email').val(response[0]['email']);
+					$('#fixed_email').val(response[0]['email']);
 					$('#update_user_type').val(response[0]['user_type']).change();
 					$('#update_user_modal').modal('show');
 				},
 			});
-		})
+
+			var fixed_email = $('#fixed_email').val();
+
+            $('#update_email').change(function () {
+                var new_email = $('#update_email').val()
+                if(fixed_email != new_email) {
+                    var email = $("#update_email").val();
+                    $.ajax({
+                        type: 'post',
+                        url: base_url + 'users/users/check_email_address',
+                        async: false,
+                        dataType: 'json',
+                        data: {email: email},
+                        success: function (response) {
+                            if(response == true) {
+                                $('#email_update_duplicate_alert').show();
+                                $("#button_update_save").attr("disabled", true);
+                            }
+                            else {
+                                $('#email_update_duplicate_alert').hide();
+                                $('#button_update_save').removeAttr("disabled");
+                            }
+                        },
+                    });
+                }
+                else {
+                    $('#email_update_duplicate_alert').hide();
+                    $('#button_update_save').removeAttr("disabled");
+                }
+            });
+
+            $('#button_update_close').click(function () {
+                $('#email_update_duplicate_alert').hide();
+                $('#button_update_save').removeAttr("disabled");
+            })
+		});
+
+        $('#email').change(function () {
+            var email = $("#email").val();
+            $.ajax({
+                type: 'post',
+                url: base_url + 'users/users/check_email_address',
+                async: false,
+                dataType: 'json',
+                data: {email: email},
+                success: function (response) {
+                    if(response == true) {
+                        $('#email_duplicate_alert').show();
+                        $("#button_create_save").attr("disabled", true);
+                    }
+                    else {
+                        $('#email_duplicate_alert').hide();
+                        $('#button_create_save').removeAttr("disabled");
+                    }
+                },
+            });
+        });
+
+        $('#button_create_reset').click(function () {
+            $('#email_duplicate_alert').hide();
+            $('#button_create_save').removeAttr("disabled");
+        })
 
 		$('#system_users').on('click', '#delete_user', function() {
 			var id = $(this).attr('data-id');

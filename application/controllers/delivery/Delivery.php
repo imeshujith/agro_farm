@@ -23,10 +23,14 @@ class Delivery extends CI_Controller {
 		$data = array(
 			'order' => $this->DeliveryOrderModel->get_do($order_id),
 			'order_lines' => $this->DeliveryOrderModel->get_do_lines($order_id),
-			'persons'  => $this->DeliveryPersonsModel->view(),
+			'persons'  => $this->DeliveryPersonsModel->active_persons(),
 		);
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('delivery/delivery_order_view', $data);
         $this->load->view('footer');
     }
@@ -35,13 +39,22 @@ class Delivery extends CI_Controller {
     	$data = array(
     		'orders' => $this->DeliveryOrderModel->list_all(),
 		);
-        $this->load->view('header');
+
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('delivery/all_delivery_orders', $data);
         $this->load->view('footer');
     }
 
     public function delivery_calendar_view() {
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('delivery/delivery_calendar_view');
         $this->load->view('footer');
     }
@@ -78,7 +91,7 @@ class Delivery extends CI_Controller {
 			);
 
 			$this->load->library('email', $mail_settings);
-			$this->email->from('delivery@biogreen.com', 'Bio Green Holdings (pvt) Ltd');
+			$this->email->from('delivery@biogreen.lk', 'Bio Green Holdings (pvt) Ltd');
 			$this->email->to($result[0]->email);
 			$this->email->set_mailtype("html");
 			$this->email->subject($result[0]->number.$result[0]->id.' order has ready to ship');
@@ -116,7 +129,7 @@ class Delivery extends CI_Controller {
 			);
 
 			$this->load->library('email', $mail_settings);
-			$this->email->from('delivery@biogreen.com', 'Bio Green Holdings (pvt) Ltd');
+			$this->email->from('delivery@biogreen.lk', 'Bio Green Holdings (pvt) Ltd');
 			$this->email->to($result[0]->email);
 			$this->email->set_mailtype("html");
 			$this->email->subject($result[0]->number.$result[0]->id.' order has shipped');
@@ -153,14 +166,14 @@ class Delivery extends CI_Controller {
 			);
 
 			$this->load->library('email', $mail_settings);
-			$this->email->from('delivery@biogreen.com', 'Bio Green Holdings (pvt) Ltd');
+			$this->email->from('delivery@biogreen.lk', 'Bio Green Holdings (pvt) Ltd');
 			$this->email->to($result[0]->email);
 			$this->email->set_mailtype("html");
 			$this->email->subject($result[0]->number.$result[0]->id.' order has canceled');
 			$this->email->message('
             <p>Dear '.$result[0]->first_name.' '.$result[0]->last_name.',</p>
 
-            <p>You order number '.$result[0]->number.$result[0]->id.' has canceled due to following reason. </p>
+            <p>You order number '.$result[0]->number.$result[0]->id.' has canceled. </p>
 
             <p>Best regards,</p>
             <p>' . $this->session->userdata('name') . '</p>
@@ -176,6 +189,37 @@ class Delivery extends CI_Controller {
 		$order_id = $this->input->get('id');
 		$delivered_date = date('Y-m-d');
 		$result = $this->DeliveryOrderModel->delivered($order_id, $delivered_date);
+
+        if($result[0]->email) {
+            $mail_settings = Array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'smtp.googlemail.com',
+                'smtp_port' => '587',
+                'smtp_user' => 'alliontestmail@gmail.com',
+                'smtp_pass' => 'Allion@321',
+                'mailtype' => 'html',
+                'smtp_crypto' => 'tls',
+                'charset' => 'utf-8',
+                'newline' => "\r\n"
+            );
+
+            $this->load->library('email', $mail_settings);
+            $this->email->from('delivery@biogreen.lk', 'Bio Green Holdings (pvt) Ltd');
+            $this->email->to($result[0]->email);
+            $this->email->set_mailtype("html");
+            $this->email->subject($result[0]->number.$result[0]->id.' order has delivered');
+            $this->email->message('
+            <p>Dear '.$result[0]->first_name.' '.$result[0]->last_name.',</p>
+
+            <p>You order number '.$result[0]->number.$result[0]->id.' delivered successfully. </p>
+
+            <p>Best regards,</p>
+            <p>' . $this->session->userdata('name') . '</p>
+            <p>AgroFarm Management System - Bio Green Holdings (pvt) Ltd</p>
+            ');
+            $this->email->send();
+        }
+
 		redirect('delivery/delivery/single_delivery_order?id='.$result[0]->id);
 	}
 

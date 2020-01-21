@@ -38,14 +38,14 @@
 									<div class="form-group">
 										<label class="control-label col-sm-4">First Name</label>
 										<div class="col-sm-4 col-offser">
-											<input type="text" class="form-control" name="first_name" value="<?php echo $user->first_name; ?>" data-validation="required">
+											<input type="text" class="form-control" name="first_name" value="<?php echo $user[0]->first_name; ?>" data-validation="required">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-4">Last Name</label>
 										<div class="col-sm-4 col-offser">
-											<input type="text" class="form-control" name="last_name" value="<?php echo $user->last_name; ?>" data-validation="required">
+											<input type="text" class="form-control" name="last_name" value="<?php echo $user[0]->last_name; ?>" data-validation="required">
 										</div>
 									</div>
 
@@ -99,7 +99,7 @@
 			var password = $("#new_password").val();
 			var confirmPassword = $("#new_reype").val();
 			if (password != confirmPassword) {
-				alert("New password and Re-Type password must be same");
+				alert("New password and Re-Type password do not match");
 				return false;
 			}
 			return true;

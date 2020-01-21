@@ -25,7 +25,11 @@ class Invoice extends CI_Controller {
 			'company'	 => $this->CompanyModel->view(),
         );
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('invoice/invoice_view', $data);
         $this->load->view('footer');
     }
@@ -108,7 +112,11 @@ class Invoice extends CI_Controller {
             'invoices' => $this->InvoiceModel->get_all(),
         );
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('invoice/all_invoices', $data);
         $this->load->view('footer');
     }
@@ -123,7 +131,11 @@ class Invoice extends CI_Controller {
 			'do_id' => $this->DeliveryOrderModel->single_do($invoice_id),
         );
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('invoice/single_invoice_view', $data);
         $this->load->view('footer');
     }
@@ -136,7 +148,7 @@ class Invoice extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'warning',
-				'message' => 'Invoice cancelled successfully',
+				'message' => 'Invoice cancelled successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('invoice/invoice/single_invoice?id='.$invoice_id);
@@ -171,7 +183,7 @@ class Invoice extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'warning',
-				'message' => 'Invoice confirmed successfully',
+				'message' => 'Invoice confirmed successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('invoice/invoice/single_invoice?id='.$invoice_id);

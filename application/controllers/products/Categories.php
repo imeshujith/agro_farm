@@ -9,6 +9,7 @@ class Categories extends CI_Controller {
 			redirect(redirect('login'));
 		}
         $this->load->model('ProductCategoriesModel');
+        $this->load->model('CompanyModel');
     }
 
     // load header, categories and footer pages
@@ -18,7 +19,11 @@ class Categories extends CI_Controller {
             'categories' => $this->ProductCategoriesModel->view(),
         );
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('products/product_categories_view', $data);
         $this->load->view("footer");
     }

@@ -9,6 +9,7 @@ class Inventory extends CI_Controller {
 			redirect(redirect('login'));
 		}
         $this->load->model('InventoryModel');
+        $this->load->model('CompanyModel');
     }
 
     // load header, inventory view and footer pages
@@ -16,7 +17,12 @@ class Inventory extends CI_Controller {
         $data = array(
             'inventories' => $this->InventoryModel->view(),
         );
-        $this->load->view('header');
+
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('products/inventory', $data);
         $this->load->view("footer");
     }

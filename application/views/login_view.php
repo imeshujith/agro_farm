@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>CM Distribution Management System</title>
+    <link rel="icon" href="<?php echo base_url() ?>assets/images/company/<?php echo $company[0]->logo; ?>" type="image/gif" sizes="16x16">
+	<title>AgroFarm Management System</title>
 	<!-- Bootstrap 3.3.7 -->
 	<link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<!--  Login css  -->
@@ -17,7 +18,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 login-box">
 				<div class="col-md-6 col-md-offset-3 col-sm-12 logo">
-					<img src="<?php echo base_url() ?>assets/images/logo.png" class="img-responsive"/>
+					<img src="<?php echo base_url() ?>assets/images/company/<?php echo $company[0]->logo; ?>" class="img-responsive"/>
 				</div>
 				<div class="col-md-12">
 					<hr/>

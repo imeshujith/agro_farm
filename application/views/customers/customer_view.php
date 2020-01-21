@@ -53,7 +53,7 @@
                             <?php
                             foreach ($customers as $customer) { ?>
                                 <tr>
-                                    <td><?php echo "CUS".sprintf("%04d", $customer->id); ?></td>
+                                    <td><?php echo "CUS".$customer->id; ?></td>
                                     <td><?php echo $customer->first_name." ". $customer->last_name; ?></td>
                                     <td>
                                         <?php

@@ -12,6 +12,7 @@ class Products extends CI_Controller {
         $this->load->model('ProductCategoriesModel');
         $this->load->model('UomModel');
         $this->load->model('StockModel');
+        $this->load->model('CompanyModel');
     }
 
     // load header, product view and footer
@@ -23,7 +24,11 @@ class Products extends CI_Controller {
             'uoms'       => $this->UomModel->view(),
         );
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('products/product_view', $data);
         $this->load->view("footer");
     }

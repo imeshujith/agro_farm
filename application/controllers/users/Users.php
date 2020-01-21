@@ -16,6 +16,7 @@ class Users extends CI_Controller {
             redirect(redirect('login'));
         }
         $this->load->model('UsersModel');
+        $this->load->model('CompanyModel');
     }
 
     // load header, dashboard and footer pages
@@ -23,7 +24,12 @@ class Users extends CI_Controller {
         $data = array(
             'users' => $this->UsersModel->view_all_users(),
         );
-        $this->load->view('header');
+
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('users/user_view', $data);
         $this->load->view("footer");
     }
@@ -47,7 +53,7 @@ class Users extends CI_Controller {
         if($result) {
             $alert = array(
                 'type' => 'success',
-                'message' => "<p>User created successfully</p><p>Invitation link send to user's email address</p>"
+                'message' => "<p>User created successful</p><p>Invitation link send to user's email address</p>"
             );
             $this->session->set_flashdata('alert', $alert);
             redirect('users/users');
@@ -69,17 +75,16 @@ class Users extends CI_Controller {
         );
 
         $this->load->library('email', $mail_settings);
-        $this->email->from('admin@biogreen.com', 'Bio Green Holdings (Pvt) Ltd');
+        $this->email->from('admin@biogreen.lk', 'Bio Green Holdings (Pvt) Ltd');
         $this->email->to($new_user['email']);
         $this->email->set_mailtype("html");
         $this->email->subject('Invitation for AgroFarm Management System - Bio Green Holdings (Pvt) Ltd');
         $this->email->message('
             <p>Dear '.$new_user['first_name'].' '.$new_user['last_name'].',</p>
 
-            <p>You have been invited to connect to "Bio Green Holdings (Pvt) Ltd" in order to get access to our system AgroFarm Management System.</p>
-            <p>Invitation Link : <a href="'.base_url().'/login/signup?email='.$new_user['email'].'">Invitation Link</a></p>
+            <p>You have been invited to connect to "Bio Green Holdings (Pvt) Ltd" in order to get access to our AgroFarm Management System.</p>
             <p>OTP Code : '.$new_user['token'].'</p>
-            <p>To accept the invitation, click on the invitation link and enter your email and OTP code</p>
+            <p>To accept the invitation, click on the following link <a href="'.base_url().'login/signup?email='.$new_user['email'].'"><strong>Invitation Link</strong></a> and enter your email and OTP code</p>
             <p>Accept invitation to "Bio Green Holdings (Pvt) Ltd"</p> <br/>
 
             <p>Best regards,</p>
@@ -99,6 +104,8 @@ class Users extends CI_Controller {
 
     // update exsisting user
     public function update_user() {
+        $user_id = $this->input->post('id');
+
         // assign form input values to array
         $edit_user = array(
             'first_name'    => $this->input->post('first_name'),
@@ -109,12 +116,12 @@ class Users extends CI_Controller {
         );
 
         // check given email has exsisting databse record
-        $result = $this->UsersModel->update_user($edit_user);
+        $result = $this->UsersModel->update_user($user_id, $edit_user);
 
         if($result) {
             $alert = array(
                 'type' => 'warning',
-                'message' => 'User details updated successfully',
+                'message' => 'User details updated successful',
             );
             $this->session->set_flashdata('alert', $alert);
             redirect('users/users');
@@ -126,7 +133,7 @@ class Users extends CI_Controller {
         $delete_user_id = $this->input->post('id');
 
         $result = $this->UsersModel->delete_user($delete_user_id);
-        return true;
+        redirect('users/users');
     }
 
     // to set inactive user
@@ -143,5 +150,17 @@ class Users extends CI_Controller {
 
         $result = $this->UsersModel->inactive_user($user_id);
         redirect('users/users');
+    }
+
+    public function check_email_address() {
+        $email = $this->input->post('email');
+
+        $result = $this->UsersModel->check_email($email);
+        if($result) {
+            echo json_encode(true);
+        }
+        else {
+            echo json_encode(false);
+        }
     }
 }

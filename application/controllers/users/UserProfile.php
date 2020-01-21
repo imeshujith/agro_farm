@@ -5,11 +5,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class UserProfile extends CI_Controller {
 	// constructor -> this function call first
 	public function __construct() {
-		if(!$this->session->userdata('name')) {
-			redirect(redirect('login'));
-		}
 		parent::__construct();
+        if(!$this->session->userdata('name')) {
+            redirect(redirect('login'));
+        }
 		$this->load->model('UsersModel');
+		$this->load->model('CompanyModel');
 	}
 
 	// load header, dashboard and footer pages
@@ -17,10 +18,14 @@ class UserProfile extends CI_Controller {
 		$user_id = $this->session->userdata('id');
 
 		$data = array(
-			'user' => $this->UsersModel->edit_user($user_id),
+			'user' => $this->UsersModel->single_item($user_id),
 		);
 
-		$this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
 		$this->load->view('users/user_profile_view', $data);
 		$this->load->view("footer");
 	}
@@ -37,7 +42,7 @@ class UserProfile extends CI_Controller {
 
 		if($result) {
 			$alert = array(
-				'type' => 'success',
+				'type' => 'warning',
 				'message' => 'User profile updated successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
@@ -64,7 +69,7 @@ class UserProfile extends CI_Controller {
 
 			if($result) {
 				$alert = array(
-					'type' => 'success',
+					'type' => 'warning',
 					'message' => 'User password change successful',
 				);
 				$this->session->set_flashdata('alert', $alert);

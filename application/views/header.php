@@ -12,6 +12,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="<?php echo base_url() ?>assets/images/company/<?php echo $company[0]->logo; ?>" type="image/gif" sizes="16x16">
 	<title>AgroFarm Management System</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -198,8 +199,8 @@
 								<li><a href="<?php echo base_url(); ?>reports/reports/stock_report"><i class="fa fa-angle-right"></i> Stock Report</a></li>
 								<li><a href="<?php echo base_url(); ?>reports/reports/delivery_report"><i class="fa fa-angle-right"></i> Delivery Report </a></li>
 <!--								<li><a href="--><?php //echo base_url(); ?><!--reports/reports/customer_report"><i class="fa fa-angle-right"></i> Customer Report </a></li>-->
-								<li><a href="<?php echo base_url(); ?>reports/reports/yearly_income_expense_report"><i class="fa fa-angle-right"></i> Yearly Income & Expense Report </a></li>
-								<li><a href="<?php echo base_url(); ?>reports/reports/monthly_income_expense_report"><i class="fa fa-angle-right"></i> Monthly Income & Expense Report </a></li>
+								<li><a href="<?php echo base_url(); ?>reports/reports/yearly_income_expense_report"><i class="fa fa-angle-right"></i> Yearly I&E Report </a></li>
+<!--								<li><a href="--><?php //echo base_url(); ?><!--reports/reports/monthly_income_expense_report"><i class="fa fa-angle-right"></i> Monthly Income & Expense Report </a></li>-->
 							</ul>
 						</a>
 					</li>

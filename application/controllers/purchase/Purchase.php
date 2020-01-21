@@ -26,7 +26,11 @@ class Purchase extends CI_Controller {
 			'company'	 => $this->CompanyModel->view(),
 		);
 
-		$this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
 		$this->load->view('purchase/purchase_view', $data);
 		$this->load->view('footer');
 	}
@@ -79,7 +83,11 @@ class Purchase extends CI_Controller {
 			'purchase_orders' => $this->PurchaseModel->select_all(),
 		);
 
-		$this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
 		$this->load->view('purchase/all_purchase', $data);
 		$this->load->view('footer');
 	}
@@ -93,7 +101,11 @@ class Purchase extends CI_Controller {
             'company'	 => $this->CompanyModel->view(),
 		);
 
-		$this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
 		$this->load->view('purchase/single_purchase_order_view', $data);
 		$this->load->view('footer');
 	}

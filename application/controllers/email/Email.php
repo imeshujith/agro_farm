@@ -8,6 +8,7 @@ class Email extends CI_Controller {
 			redirect(redirect('login'));
 		}
 		$this->load->model('EmailModel');
+		$this->load->model('CompanyModel');
 	}
 
     public function index() {
@@ -17,7 +18,11 @@ class Email extends CI_Controller {
 			'emails' => $this->EmailModel->view($user)
 		);
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('email/email_view', $data);
         $this->load->view('footer');
     }
@@ -55,7 +60,7 @@ class Email extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'success',
-				'message' => 'Email sent successful',
+				'message' => 'Email send successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('email/email');

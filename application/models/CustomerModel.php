@@ -33,12 +33,7 @@ Class CustomerModel extends CI_Model {
     public function update($customer_id, $new_values) {
 		$this->db->where('id', $customer_id);
 		$this->db->update('customers', $new_values);
-		if ($this->db->affected_rows() == 1) {
-			return true;;
-		}
-		else {
-			return false;;
-		}
+		return true;
 	}
 
 	public function delete($customer_id) {

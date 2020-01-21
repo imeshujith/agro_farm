@@ -9,6 +9,7 @@ class Uom extends CI_Controller {
 			redirect(redirect('login'));
 		}
         $this->load->model('UomModel');
+        $this->load->model('CompanyModel');
     }
 
     // load header, uom view and footer pages
@@ -18,7 +19,11 @@ class Uom extends CI_Controller {
             'uoms' => $this->UomModel->view(),
         );
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('products/uom_view', $data);
         $this->load->view("footer");
     }

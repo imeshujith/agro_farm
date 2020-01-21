@@ -22,12 +22,7 @@ Class UomModel extends CI_Model {
     public function update($uom_id, $new_values) {
         $this->db->where('id', $uom_id);
 		$this->db->update('unit_of_measures', $new_values);
-        if ($this->db->affected_rows() == 1) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return true;
     }
 
     public function delete($uom_id) {

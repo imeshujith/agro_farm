@@ -8,14 +8,19 @@ class DeliveryPersons extends CI_Controller {
 			redirect(redirect('login'));
 		}
 		$this->load->model('DeliveryPersonsModel');
+		$this->load->model('CompanyModel');
 	}
 
 	public function index() {
 		$data = array(
-			'persons' => $this->DeliveryPersonsModel->active_persons(),
+			'persons' => $this->DeliveryPersonsModel->view(),
 		);
 
-		$this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
 		$this->load->view('delivery/delivery_persons', $data);
 		$this->load->view('footer');
 	}
@@ -37,10 +42,34 @@ class DeliveryPersons extends CI_Controller {
 			$this->session->set_flashdata('alert', $alert);
 			redirect('delivery/DeliveryPersons');
 		}
+		else {
+            redirect('delivery/DeliveryPersons');
+        }
 	}
 
+    public function get_single_item() {
+        $person_id = $this->input->post('id');
+
+        $result = $this->DeliveryPersonsModel->single_item($person_id);
+        if($result == true) {
+            echo json_encode($result);
+        }
+    }
+
+    public function check_duplicate_nic() {
+        $nic = $this->input->post('nic');
+
+        $result = $this->DeliveryPersonsModel->check_nic($nic);
+        if($result) {
+            echo json_encode(true);
+        }
+        else {
+            echo json_encode(false);
+        }
+    }
+
 	public function update_person() {
-	    $id = $this->input->post('update_dp_id');
+	    $id = $this->input->post('id');
 
 	    $new_values = array(
 	        'name' => $this->input->post('update_dp_name'),
@@ -53,18 +82,16 @@ class DeliveryPersons extends CI_Controller {
 	    if ($result) {
             $alert = array(
                 'type' => 'warning',
-                'message' => 'Delivery person\'s information updated successful',
+                'message' => 'Delivery person information updated successful',
             );
             $this->session->set_flashdata('alert', $alert);
-            redirect('delivery/DeliveryPersons');
-        }
-	    else {
             redirect('delivery/DeliveryPersons');
         }
     }
 
     public function inactive_person() {
 	    $id = $this->input->get('id');
+
         $result = $this->DeliveryPersonsModel->inactive($id);
 
         if($result) {
@@ -82,12 +109,13 @@ class DeliveryPersons extends CI_Controller {
 
     public function active_person() {
         $id = $this->input->get('id');
+
         $result = $this->DeliveryPersonsModel->active($id);
 
         if($result) {
             $alert = array(
                 'type' => 'warning',
-                'message' => 'Delivery person inactivate successful',
+                'message' => 'Delivery person activate successful',
             );
             $this->session->set_flashdata('alert', $alert);
             redirect('delivery/DeliveryPersons');

@@ -38,8 +38,8 @@
 								<th>Name</th>
 								<th>NIC Number</th>
 								<th>Mobile Number</th>
-								<th>Status</th>
-                                <th></th>
+								<th class="text-center">Status</th>
+                                <th class="text-center"></th>
 							</tr>
 							</thead>
 							<tbody id="dp_table">
@@ -48,15 +48,15 @@
 									<td><?php echo $person->name; ?></td>
 									<td><?php echo $person->nic; ?></td>
 									<td><?php echo $person->contact; ?></td>
-									<td></td>
-									<td>
-                                        <button class="btn btn-primary btn-sm" data-id="<?php echo $person->id; ?>" id="update_dp">Update</button>
+									<td class="text-center">
                                         <?php if($person->active == true) { ?>
-                                            <a class="btn btn-danger btn-sm"  href="<?php echo base_url(); ?>delivery/DeliveryPersons/inactive_person">Inactive</a>
+                                            <a href="<?php echo base_url(); ?>delivery/DeliveryPersons/inactive_person?id=<?php echo $person->id; ?>"><span class="label label-success">Active</span></a>
+                                        <?php } else { ?>
+                                            <a href="<?php echo base_url(); ?>delivery/DeliveryPersons/active_person?id=<?php echo $person->id; ?>"><span class="label label-danger">Inactive</span></a>
                                         <?php } ?>
-                                        <?php if($person->active == false) { ?>
-                                            <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>delivery/DeliveryPersons/active_person">Active</a>
-                                        <?php } ?>
+                                    </td>
+									<td class="text-center">
+                                        <button class="btn btn-primary btn-xs" data-id="<?php echo $person->id; ?>" id="update_dp">Update</button>
                                     </td>
 								</tr>
 							<?php } ?>
@@ -72,8 +72,10 @@
 					<div class="box-body">
 						<form action="<?php echo base_url(); ?>delivery/DeliveryPersons/create_person" method="post" role="form">
 							<div class="box-body">
+                                <div class="alert alert-danger" id="nic_duplicate" style="display: none;">
+                                    <strong>Warning!</strong> The entered NIC number already exist in the system
+                                </div>
 								<div class="form-group">
-
 									<div class="form-group">
 										<label>Name</label>
 										<input type="text" class="form-control" name="name" data-validation="required"/>
@@ -81,7 +83,7 @@
 
 									<div class="form-group">
 										<label>NIC Number</label>
-										<input type="text" class="form-control" name="nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" title="Contain 10 or 12 character" required/>
+										<input type="text" class="form-control" name="nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" title="Contain 10 or 12 character" required id="nic"/>
 									</div>
 
 									<div class="form-group">
@@ -110,17 +112,21 @@
                             <h4 class="modal-title">Update Delivery Person</h4>
                         </div>
                         <div class="modal-body">
-                            <form action="<?php echo base_url(); ?>delivery/DeliveryPersons/update_delivery_person" method="post" role="form">
+                            <div class="alert alert-danger"  id="nic_duplicate_alert" style="display: none;">
+                                <strong>Warning!</strong> The entered NIC number already exist in the system
+                            </div>
+                            <form action="<?php echo base_url(); ?>delivery/DeliveryPersons/update_person" method="post" role="form" id="update_person_form">
                                 <div class="form-group">
 
                                     <div class="form-group">
                                         <label>Name</label>
                                         <input type="text" class="form-control" name="update_dp_name" id="update_dp_name" data-validation="required"/>
-                                        <input type="hidden" class="form-control" name="update_dp_id"/>
+                                        <input type="hidden" class="form-control" name="id" id="update_dp_id"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label>NIC Number</label>
+                                        <input type="hidden" class="form-control" id="fixed_nic"/>
                                         <input type="text" class="form-control" name="update_dp_nic" id="update_dp_nic" pattern="[0-9]{9}[x|X|v|V]|[0-9]{11}[x|X|v|V]" title="Contain 10 or 12 character" required/>
                                     </div>
 
@@ -132,8 +138,8 @@
                                 </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel </button>
-                            <button type="submit" class="btn btn-success"> Update </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="button_cancel"> Cancel </button>
+                            <button type="submit" class="btn btn-success" id="button_update"> Update </button>
                             </form>
                         </div>
                     </div>
@@ -147,10 +153,11 @@
 <script>
     $(document).ready(function() {
         $('#dp_table').on('click', '#update_dp', function() {
+            $('#nic_duplicate_alert').hide();
             var id = $(this).attr('data-id');
             $.ajax({
                 type: 'post',
-                url: base_url + 'delivery/DeliveryPersons/person',
+                url: base_url + 'delivery/DeliveryPersons/get_single_item',
                 async: false,
                 dataType: 'json',
                 data: {id: id},
@@ -158,8 +165,61 @@
                     $('#update_dp_id').val(response[0]['id']);
                     $('#update_dp_name').val(response[0]['name']);
                     $('#update_dp_nic').val(response[0]['nic']);
-                    $('#update_dp_contact').val(response[0]['contact']));
+                    $('#fixed_nic').val(response[0]['nic']);
+                    $('#update_dp_contact').val(response[0]['contact']);
                     $('#update_delivery_person_modal').modal('show');
+                },
+            });
+
+            var fixed_nic = $('#fixed_nic').val();
+            $('#update_dp_nic').focusout(function() {
+                var new_nic = $('#update_dp_nic').val()
+                console.log(new_nic);
+                console.log(fixed_nic);
+                if(fixed_nic != new_nic) {
+                    var nic = $("#update_dp_nic").val();
+                    $.ajax({
+                        type: 'post',
+                        url: base_url + 'delivery/DeliveryPersons/check_duplicate_nic',
+                        async: false,
+                        dataType: 'json',
+                        data: {nic: nic},
+                        success: function (response) {
+                            if(response == true) {
+                                $('#nic_duplicate_alert').show();
+                                $("#button_update").attr("disabled", true);
+                            }
+                            else {
+                                $('#nic_duplicate_alert').hide();
+                                $('#button_update').removeAttr("disabled");
+                            }
+                        },
+                    });
+                }
+                else {
+                    $('#nic_duplicate_alert').hide();
+                    $('#button_update').removeAttr("disabled");
+                }
+            });
+        });
+
+        $('#nic').focusout(function () {
+            var nic = $("#nic").val();
+            $.ajax({
+                type: 'post',
+                url: base_url + 'delivery/DeliveryPersons/check_duplicate_nic',
+                async: false,
+                dataType: 'json',
+                data: {nic: nic},
+                success: function (response) {
+                    if(response == true) {
+                        $('#nic_duplicate').show();
+                        $("#button_save").attr("disabled", true);
+                    }
+                    else {
+                        $('#nic_duplicate').hide();
+                        $('#button_save').removeAttr("disabled");
+                    }
                 },
             });
         });

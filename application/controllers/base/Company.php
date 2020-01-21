@@ -36,8 +36,11 @@ class Company extends CI_Controller {
             $this->session->set_userdata('logo', $data['company_details'][0]->logo);
         }
 
-        // load company view
-        $this->load->view('header');
+       $header = array(
+           'company'	 => $this->CompanyModel->view(),
+       );
+
+        $this->load->view('header', $header);
         $this->load->view('base/company', $data);
         $this->load->view("footer");
     }

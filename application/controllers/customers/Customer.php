@@ -18,6 +18,7 @@ class Customer extends CI_Controller {
         $this->load->model('CitiesModel');
         $this->load->model('CountriesModel');
         $this->load->model('CustomerModel');
+        $this->load->model('CompanyModel');
     }
 
     public function index() {
@@ -28,7 +29,11 @@ class Customer extends CI_Controller {
             'customers' => $this->CustomerModel->view(),
         );
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('customers/customer_view', $data);
         $this->load->view('footer');
     }

@@ -18,6 +18,7 @@ class Home extends CI_Controller {
         $this->load->model('ProductsModel');
         $this->load->model('CustomerModel');
         $this->load->model('SupplierModel');
+        $this->load->model('CompanyModel');
     }
 
     public function index() {
@@ -44,9 +45,14 @@ class Home extends CI_Controller {
     		'stocks' => $this->DashboardModel->stock_level(),
     		'invoices' => $this->DashboardModel->all_invoices(),
 			'piechart' => $chart_data,
+            'company'	 => $this->CompanyModel->view(),
 		);
 
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('dashboard', $data);
         $this->load->view("footer");
     }

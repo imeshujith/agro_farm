@@ -68,6 +68,12 @@ Class UsersModel extends CI_Model {
         }
     }
 
+    public function check_email($email) {
+        $this->db->where('email', $email);
+        $query = $this->db->get('users');
+        return $query->result();
+    }
+
     // return edit user details to contoller
     public function single_item($edit_user_id) {
         $this->db->where('id', $edit_user_id);
@@ -76,10 +82,9 @@ Class UsersModel extends CI_Model {
     }
 
     // update exsisting user details from databse
-    public function update_user($edit_user) {
-        // check duplicate accounts
-		$this->db->where('id', $this->input->post('user_id'));
-		$this->db->update('users', $edit_user);
+    public function update_user($user_id, $edit_user) {
+        $this->db->where('id', $user_id);
+        $query = $this->db->update('users', $edit_user);
 		return true;
     }
 

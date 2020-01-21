@@ -111,7 +111,7 @@ class Returns extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'warning',
-				'message' => 'Return Order cancelled successfully',
+				'message' => 'Return Order cancelled successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('returns/returns/single_return?id='.$return_id);
@@ -140,7 +140,7 @@ class Returns extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'warning',
-				'message' => 'Return Order confirmed successfully',
+				'message' => 'Return Order confirmed successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('returns/returns/single_return?id='.$return_id);

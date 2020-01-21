@@ -27,12 +27,7 @@ Class ProductCategoriesModel extends CI_Model {
     public function update($category_id, $new_values) {
         $this->db->where('id', $category_id);
         $this->db->update('product_category', $new_values);
-        if ($this->db->affected_rows() == 1) {
-            return true;;
-        }
-        else {
-            return false;;
-        }
+        return true;
     }
 
     public function delete($category_id) {

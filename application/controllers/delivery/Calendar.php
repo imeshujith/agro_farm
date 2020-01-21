@@ -8,10 +8,15 @@ class Calendar extends CI_Controller {
 			redirect(redirect('login'));
 		}
 		$this->load->model('DeliveryCalendarModel');
+		$this->load->model('CompanyModel');
 	}
 
     public function index() {
-        $this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
         $this->load->view('delivery/calendar_view');
         $this->load->view('footer');
     }

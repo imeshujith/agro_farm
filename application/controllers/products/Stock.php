@@ -9,6 +9,7 @@ class Stock extends CI_Controller {
 			redirect(redirect('login'));
 		}
         $this->load->model('StockModel');
+        $this->load->model('CompanyModel');
     }
 
    // load header, inventory view and footer pages
@@ -19,7 +20,11 @@ class Stock extends CI_Controller {
             'products' => $this->StockModel->view($cat_id),
         );
 
-        $this->load->view('header');
+       $header = array(
+           'company'	 => $this->CompanyModel->view(),
+       );
+
+        $this->load->view('header', $header);
         $this->load->view('products/stock', $data);
         $this->load->view("footer");
     }

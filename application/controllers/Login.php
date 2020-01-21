@@ -16,7 +16,10 @@ class Login extends CI_Controller {
 	}
 
 	public function index() {
-		$this->load->view("login_view");
+        $data = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+		$this->load->view("login_view", $data);
 	}
 
 	public function login() {
@@ -49,6 +52,7 @@ class Login extends CI_Controller {
 		// load signup form
 		$data = array(
 			'email' => $this->input->get('email'),
+            'company'	 => $this->CompanyModel->view(),
 		);
 		$this->load->view("signup_view", $data);
 	}
@@ -83,7 +87,10 @@ class Login extends CI_Controller {
 
 	public function forgot_password() {
 		// load forget_password view
-		$this->load->view('forgot_password');
+        $data = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+		$this->load->view('forgot_password', $data);
 
 		$email = $this->input->post('email');
 
@@ -105,7 +112,7 @@ class Login extends CI_Controller {
 			);
 
 			$this->load->library('email', $mail_settings);
-			$this->email->from('admin@biogreen.com', 'Bio Green Holdings (pvt) Ltd');
+			$this->email->from('admin@biogreen.lk', 'Bio Green Holdings (pvt) Ltd');
 			$this->email->to($result[0]->email);
 			$this->email->set_mailtype("html");
 			$this->email->subject('Request Password Reset');

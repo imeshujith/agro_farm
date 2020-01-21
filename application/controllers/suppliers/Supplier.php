@@ -18,6 +18,7 @@ class Supplier extends CI_Controller {
 		$this->load->model('CitiesModel');
 		$this->load->model('CountriesModel');
 		$this->load->model('SupplierModel');
+		$this->load->model('CompanyModel');
 	}
 
 	public function index() {
@@ -28,7 +29,11 @@ class Supplier extends CI_Controller {
 			'suppliers' => $this->SupplierModel->view(),
 		);
 
-		$this->load->view('header');
+        $header = array(
+            'company'	 => $this->CompanyModel->view(),
+        );
+
+        $this->load->view('header', $header);
 		$this->load->view('suppliers/suppliers_view', $data);
 		$this->load->view('footer');
 	}

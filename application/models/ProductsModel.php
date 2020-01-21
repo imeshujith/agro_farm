@@ -33,12 +33,7 @@ Class ProductsModel extends CI_Model {
 	public function update($product_id, $new_values) {
 		$this->db->where('id', $product_id);
 		$this->db->update('product', $new_values);
-		if ($this->db->affected_rows() == 1) {
-			return true;;
-		}
-		else {
-			return false;;
-		}
+		return true;
 	}
 
 	public function delete($product_id) {

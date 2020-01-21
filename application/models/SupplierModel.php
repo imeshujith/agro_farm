@@ -34,12 +34,7 @@ Class SupplierModel extends CI_Model {
 	public function update($supplier_id, $new_values) {
 		$this->db->where('id', $supplier_id);
 		$this->db->update('suppliers', $new_values);
-		if ($this->db->affected_rows() == 1) {
-			return $this->db->error();;
-		}
-		else {
-			return $this->db->error();;
-		}
+		return true;
 	}
 
 	public function delete($supplier_id) {
