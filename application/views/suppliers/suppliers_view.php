@@ -21,7 +21,7 @@
 	<?php } ?>
 
 	<!-- add new supplier modal -->
-	<div class="modal fade" tabindex="-1" role="dialog" id="add_customer_modal">
+	<div class="modal fade" tabindex="-1" role="dialog" id="add_supplier_modal">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -148,7 +148,7 @@
     <!-- add new supplier modal end -->
 
     <!--supplier update modal-->
-    <div class="modal fade" tabindex="-1" role="dialog" id="update_customer_modal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="update_supplier_modal">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -162,8 +162,8 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="radio-inline"><input type="radio" name="update_supplier_type" id="update_supplier_person" value="person" checked data-validation="required">Person</label>
-                                            <label class="radio-inline"><input type="radio" name="update_supplier_type" id="update_supplier_company" value="company" data-validation="required">Company</label>
+                                            <label class="radio-inline"><input type="radio" name="supplier_type" id="update_supplier_person" value="person" checked data-validation="required">Person</label>
+                                            <label class="radio-inline"><input type="radio" name="supplier_type" id="update_supplier_company" value="company" data-validation="required">Company</label>
                                         </div>
                                     </div>
                                 </div>
@@ -174,15 +174,15 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label id="update_supplier_label">First Name</label>
-                                            <input type="text" class="form-control" name="update_first_name" data-validation="required">
-                                            <input type="hidden" name="id">
+                                            <input type="text" class="form-control" name="first_name" id="update_first_name" data-validation="required">
+                                            <input type="hidden" name="id" id="update_id">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group" id="update_supplier_ln">
                                             <label>Last Name</label>
-                                            <input type="text" class="form-control" name="update_last_name" data-validation="required">
+                                            <input type="text" class="form-control" name="last_name" id="update_last_name" data-validation="required">
                                         </div>
                                     </div>
                                 </div>
@@ -193,14 +193,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Street</label>
-                                            <input type="text" class="form-control" name="update_street_one" data-validation="required">
+                                            <input type="text" class="form-control" name="street_one" id="update_street_one" data-validation="required">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Street Two</label>
-                                            <input type="text" class="form-control" name="update_street_two">
+                                            <input type="text" class="form-control" name="street_two" id="update_street_two">
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +211,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>City</label>
-                                            <select class="form-control" name="city" id="update_supplier_city" data-validation="required">
+                                            <select class="form-control" name="city" id="update_city" data-validation="required">
                                                 <?php
                                                 echo '<option selected="selected" disabled>Select One</option>';
                                                 foreach ($cities as $city) { ?>
@@ -224,7 +224,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Postal Code</label>
-                                            <input type="text" class="form-control" name="postal_code" id="update_supplier_postal_code" readonly>
+                                            <input type="text" class="form-control" name="postal_code" id="update_postal_code" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -377,22 +377,22 @@
                     if(response[0]['supplier_type'] == 'person') {
                         $('#update_supplier_person').prop( "checked", true );
                         $('#update_supplier_label').text('First Name');
-                        $('#update_last_name').show();
+                        $('#update_supplier_ln').show();
                     }
                     else {
                         $('#update_supplier_company').prop( "checked", true );
                         $('#update_supplier_label').text('Company Name');
-                        $('#update_last_name').hide();
+                        $('#update_supplier_ln').hide();
                     }
 
-                    $('#update_supplier_id').val(response[0]['id']);
-                    $('#update_supplier_first_name').val(response[0]['first_name']);
-                    $('#update_supplier_last_name').val(response[0]['last_name']);
-                    $('#update_supplier_street_one').val(response[0]['street_one']);
-                    $('#update_supplier_street_two').val(response[0]['street_two']);
-                    $('#update_supplier_city').val(response[0]['city']).change();
-                    $('#update_supplier_phone').val(response[0]['phone']);
-                    $('#update_supplier_email').val(response[0]['email']);
+                    $('#update_id').val(response[0]['id']);
+                    $('#update_first_name').val(response[0]['first_name']);
+                    $('#update_last_name').val(response[0]['last_name']);
+                    $('#update_street_one').val(response[0]['street_one']);
+                    $('#update_street_two').val(response[0]['street_two']);
+                    $('#update_city').val(response[0]['city']).change();
+                    $('#update_phone').val(response[0]['phone']);
+                    $('#update_email').val(response[0]['email']);
                     $('#update_supplier_modal').modal('show');
                 },
             });
