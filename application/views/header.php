@@ -200,7 +200,7 @@
 								<li><a href="<?php echo base_url(); ?>reports/reports/delivery_report"><i class="fa fa-angle-right"></i> Delivery Report </a></li>
 <!--								<li><a href="--><?php //echo base_url(); ?><!--reports/reports/customer_report"><i class="fa fa-angle-right"></i> Customer Report </a></li>-->
 								<li><a href="<?php echo base_url(); ?>reports/reports/yearly_income_expense_report"><i class="fa fa-angle-right"></i> Yearly I&E Report </a></li>
-<!--								<li><a href="--><?php //echo base_url(); ?><!--reports/reports/monthly_income_expense_report"><i class="fa fa-angle-right"></i> Monthly Income & Expense Report </a></li>-->
+								<li><a href="<?php echo base_url(); ?>reports/reports/monthly_income_expense_report"><i class="fa fa-angle-right"></i> Monthly Income & Expense Report </a></li>
 							</ul>
 						</a>
 					</li>

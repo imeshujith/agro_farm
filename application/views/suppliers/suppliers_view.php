@@ -307,7 +307,7 @@
 							Suppliers
 						</h3>
 						<div class="pull-right">
-							<button class="btn btn-success" data-toggle="modal" data-target="#add_customer_modal">&nbsp;&nbsp;Add New Supplier</button>
+							<button class="btn btn-success" data-toggle="modal" data-target="#add_supplier_modal">&nbsp;&nbsp;Add New Supplier</button>
 						</div>
 					</div>
 					<div class="box-body">
