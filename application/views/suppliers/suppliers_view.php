@@ -341,9 +341,9 @@
 									<td><?php echo $supplier->email; ?></td>
                                     <td class="text-center">
                                         <?php if($supplier->active == true) { ?>
-											<a href="<?php echo base_url(); ?>suppliers/suppliers/inactive_supplier?id=<?php echo $supplier->id; ?>"><span class="label label-success">Active</span></a>
+											<a href="<?php echo base_url(); ?>suppliers/supplier/inactive_supplier?id=<?php echo $supplier->id; ?>"><span class="label label-success">Active</span></a>
                                         <?php } else { ?>
-											<a href="<?php echo base_url(); ?>suppliers/suppliers/active_supplier?id=<?php echo $supplier->id; ?>"><span class="label label-danger">Inactive</span></a>
+											<a href="<?php echo base_url(); ?>suppliers/supplier/active_supplier?id=<?php echo $supplier->id; ?>"><span class="label label-danger">Inactive</span></a>
                                         <?php } ?>
                                     </td>
 									<td><?php echo $supplier->create_date; ?></td>

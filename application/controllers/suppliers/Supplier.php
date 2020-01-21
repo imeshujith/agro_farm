@@ -134,6 +134,7 @@ class Supplier extends CI_Controller {
 
     public function active_supplier() {
         $supplier_id = $this->input->get('id');
+
         $result = $this->SupplierModel->active($supplier_id);
         if($result) {
             $alert = array(
@@ -151,6 +152,7 @@ class Supplier extends CI_Controller {
 
     public function inactive_supplier() {
         $supplier_id = $this->input->get('id');
+
         $result = $this->SupplierModel->inactive($supplier_id);
         if($result) {
             $alert = array(
