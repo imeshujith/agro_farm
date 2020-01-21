@@ -61,7 +61,7 @@ class Customer extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'success',
-				'message' => 'New Customer Created Successful',
+				'message' => 'New customer created successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('customers/customer');
@@ -101,7 +101,7 @@ class Customer extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'warning',
-				'message' => 'Customer Information Updated Successful',
+				'message' => 'Customer information updated successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('customers/customer');
@@ -116,7 +116,7 @@ class Customer extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'warning',
-				'message' => 'Customer Deleted Successful',
+				'message' => 'Customer deleted successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('customers/customer');

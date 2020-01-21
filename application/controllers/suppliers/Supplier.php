@@ -63,7 +63,7 @@ class Supplier extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'success',
-				'message' => 'New Supplier Created Successful',
+				'message' => 'New supplier created successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('suppliers/supplier');
@@ -104,7 +104,7 @@ class Supplier extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'warning',
-				'message' => 'Supplier Information Updated Successful',
+				'message' => 'Supplier information updated successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('suppliers/supplier');
@@ -119,7 +119,7 @@ class Supplier extends CI_Controller {
 		if($result) {
 			$alert = array(
 				'type' => 'warning',
-				'message' => 'Supplier Deleted Successful',
+				'message' => 'Supplier deleted successful',
 			);
 			$this->session->set_flashdata('alert', $alert);
 			redirect('suppliers/supplier');
