@@ -50,7 +50,7 @@
 									<td><?php echo $category->create_date; ?></td>
 									<td class="text-center">
 										<button class="btn btn-primary btn-xs" id="update_category" data-id="<?php echo $category->id; ?>">Update</button>
-										<button class="btn btn-danger btn-xs" id="delete_category" data-id="<?php echo $category->id; ?>">Delete</button>
+                                        <?php if($this->session->userdata('type') != 'Sales Person') { ?><button class="btn btn-danger btn-xs" id="delete_category" data-id="<?php echo $category->id; ?>">Delete</button><?php } ?>
 									</td>
 								</tr>
 							<?php } ?>

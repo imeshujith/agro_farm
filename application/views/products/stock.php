@@ -56,7 +56,7 @@
 										</div>
 									</td>
 									<td class="text-center" width="10%">
-										<button class="btn btn-default btn-sm" id="update_stock_button" data-id="<?php echo $product->id; ?>">Update Qty</button>
+                                        <?php if($this->session->userdata('type') != 'Sales Person') { ?><button class="btn btn-default btn-sm" id="update_stock_button" data-id="<?php echo $product->id; ?>">Update Qty</button><?php } ?>
 									</td>
 								</tr>
 							<?php } ?>

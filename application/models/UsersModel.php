@@ -11,6 +11,7 @@ Class UsersModel extends CI_Model {
         $condition = array(
             'email'     => $login_data['email'],
             'password'  => sha1($login_data['password']),
+            'active' => 1
         );
         $query = $this->db->select("*")->from("users")->where($condition);
         $result = $query->get()->result_array();
@@ -34,6 +35,7 @@ Class UsersModel extends CI_Model {
         $condition = array(
             'email'  => $signup_user['email'],
             'token'  => $otp,
+            'active' => 1
         );
         $query = $this->db->select("*")->from("users")->where($condition);
         $result = $query->get()->result_array();
@@ -117,7 +119,12 @@ Class UsersModel extends CI_Model {
 
      public function reset_user($email) {
 		 $query = $this->db->get_where('users', array('email' => $email));
-		 return $query->result();
+		 if($query->result()) {
+		     return $query->result();
+         }
+		 else {
+		     return false;
+         }
      }
 
      public function update_profile($id, $data) {

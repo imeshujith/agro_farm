@@ -81,7 +81,8 @@ class Login extends CI_Controller {
 		}
 		// sigup unsuccessfull redirect popup error message
 		else {
-			redirect('login');
+            $this->session->set_flashdata('incorrect_otp', true);
+            redirect('login/signup');
 		}
 	}
 
@@ -119,7 +120,7 @@ class Login extends CI_Controller {
 			$this->email->message('
                 <p>Dear '.$result[0]->first_name.' '.$result[0]->last_name.',</p>
 
-                <p>You have been requested to reset your "AgroFarm Management System" password in order to get reset to your password click on the following link and enter your OTP code.</p>
+                <p>You have been requested to reset your "AgroFarm Management System" password in order to get reset to your password click on the following link and enter your OTC code.</p>
 
                 <p>Code : '.$result[0]->token.'</p>
                 <p>Link: <a href="'.base_url().'login/signup?email='.$result[0]->email.'">Reset Password Link</a> <br/>
@@ -128,7 +129,12 @@ class Login extends CI_Controller {
                 <p>Administrator</p>
                 ');
 			$this->email->send();
+            $this->session->set_flashdata('correct_email', true);
 		}
+
+		elseif ($result == false) {
+            $this->session->set_flashdata('incorrect_email', true);
+        }
 	}
 
 	// logout function

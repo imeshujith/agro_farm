@@ -31,7 +31,7 @@
                             <div class="col-md-3">
                                 <address >
                                     <strong>Supplier Address</strong><br/>
-                                    <span style="font-size: 26px;"><?php echo $purchase_order[0]->first_name. ' '.$purchase_order[0]->last_name; ?></span><br>
+                                    <span><?php echo $purchase_order[0]->first_name. ' '.$purchase_order[0]->last_name; ?></span><br>
                                     <?php echo $purchase_order[0]->street_one; ?><br>
                                     <?php echo $purchase_order[0]->street_two; ?><br>
                                     <?php echo $purchase_order[0]->supplier_city; ?><br>

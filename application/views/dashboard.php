@@ -75,7 +75,7 @@
 							</thead>
 							<tbody>
 							<?php foreach($invoices as $invoice) { ?>
-								<tr style="cursor:pointer;" data-href="<?php echo base_url(); ?>invoice/invoice/single_invoice?id=<?php echo $invoice->id; ?>" class="clickable-row <?php if($invoice->status == 'Cancel') { echo 'bg-danger text-danger';} elseif($invoice->status == 'Draft') { echo 'bg-warning text-warning';} ?>">
+								<tr>
 									<td><?php echo $invoice->number.sprintf("%04d", $invoice->id); ?></td>
 									<td><?php echo $invoice->first_name.' '.$invoice->last_name; ?></td>
 									<td class="text-right"><?php echo $invoice->date; ?></td>

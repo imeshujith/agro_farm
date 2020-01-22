@@ -46,12 +46,14 @@ class Purchase extends CI_Controller {
     }
 
 	public function create_purchase() {
+        $company = $this->CompanyModel->view();
+
 		$purchase_order = array(
 			'number' => 'PO/'.date("Y").'/'.date("m").'/',
 			'payment_type' => $this->input->post('purchase_payment'),
 			'date' => $this->input->post('purchase_date'),
 			'total_amount' => $this->input->post('purchase_subtotal'),
-			'company_id' => 4,
+			'company_id' => $company[0]->id,
             'suppliers_id' => $this->input->post('supplier_name'),
 		);
 

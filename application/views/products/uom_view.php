@@ -50,7 +50,7 @@
 									<td><?php echo $uom->create_date; ?></td>
 									<td class="text-center">
 										<button class="btn btn-primary btn-xs" id="update_uom" data-id="<?php echo $uom->id; ?>">Update</button>
-										<button class="btn btn-danger btn-xs" id="delete_uom" data-id="<?php echo $uom->id; ?>">Delete</button>
+                                        <?php if($this->session->userdata('type') != 'Sales Person') { ?><button class="btn btn-danger btn-xs" id="delete_uom" data-id="<?php echo $uom->id; ?>">Delete</button><?php } ?>
 									</td>
 								</tr>
 							<?php } ?>

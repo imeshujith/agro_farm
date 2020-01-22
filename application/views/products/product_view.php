@@ -173,7 +173,7 @@
                                     </td>
                                     <td class="text-center">
                                         <button class="btn btn-primary btn-xs" id="update_product" data-id="<?php echo $product->id; ?>">Update</button>
-                                        <button class="btn btn-danger btn-xs" id="delete_product" data-id="<?php echo $product->id; ?>">Delete</button>
+                                        <?php if($this->session->userdata('type') != 'Sales Person') { ?><button class="btn btn-danger btn-xs" id="delete_product" data-id="<?php echo $product->id; ?>">Delete</button><?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>

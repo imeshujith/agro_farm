@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CM Distribution Management System Management System</title>
+	<title>AgroFarm Management System</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.7 -->
@@ -35,7 +35,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<h2 class="page-header">
-							<i class="fa fa-globe"></i> <?php echo $company[0]->name; ?> - Purchase Order
+							<img src="<?php echo base_url(); ?>assets/images/company/<?php echo $company[0]->logo; ?>" width="40px" height="32px"/> <?php echo $company[0]->name; ?> - Purchase Order
 							<small class="pull-right">Printed Date: <?php echo date('d/m/Y'); ?></small>
 						</h2>
 					</div>
@@ -63,7 +63,7 @@
 					<div class="col-sm-4 invoice-col">
 						<strong>Customer</strong>
 						<address>
-							<span><?php echo $company[0]->name; ?></span><br>
+							<strong><?php echo $company[0]->name; ?></strong><br>
 							<?php echo $company[0]->street; ?><br>
 							<?php echo $company[0]->city; ?><br>
 							<?php echo $company[0]->country; ?><br>

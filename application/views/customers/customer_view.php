@@ -73,7 +73,7 @@
                                     <td><?php echo $customer->create_date; ?></td>
                                     <td class="text-center">
                                         <button class="btn btn-primary btn-sm" id="update_customer" data-id="<?php echo $customer->id; ?>">Update</button>
-                                        <button class="btn btn-danger btn-sm" id="delete_customer" data-id="<?php echo $customer->id; ?>">Delete</button>
+                                        <?php if($this->session->userdata('type') != 'Sales Person') { ?><button class="btn btn-danger btn-sm" id="delete_customer" data-id="<?php echo $customer->id; ?>">Delete</button><?php }?>
                                     </td>
                                 </tr>
                             <?php } ?>

@@ -99,7 +99,7 @@
 			var password = $("#new_password").val();
 			var confirmPassword = $("#new_reype").val();
 			if (password != confirmPassword) {
-				alert("New password and Re-Type password do not match");
+                Swal.fire('New password and Re-Type password does not match');
 				return false;
 			}
 			return true;

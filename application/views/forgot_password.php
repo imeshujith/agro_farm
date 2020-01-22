@@ -23,6 +23,20 @@
 				<div class="col-md-12">
 					<hr/>
 
+                    <?php if($this->session->flashdata('incorrect_email')) { ?>
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            Incorrect email address please check again
+                        </div>
+                    <?php } ?>
+
+                    <?php if($this->session->flashdata('correct_email')) { ?>
+                        <div class="alert alert-success">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            Password reset link send successfully, check your email address
+                        </div>
+                    <?php } ?>
+
 					<form role="form" action="<?php echo base_url('Login/forgot_password'); ?>" method="post">
 						<div class="form-group" id="group-email">
 							<label for="email" class="sr-only">Email</label>

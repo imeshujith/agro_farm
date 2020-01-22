@@ -19,6 +19,7 @@
 							</tr>
 							</thead>
 							<tbody>
+                            <?php if($this->session->userdata('type') == 'Admin') { ?>
 							<tr>
 								<td>Admin</td>
 								<td>
@@ -45,6 +46,8 @@
 									</ul>
 								</td>
 							</tr>
+                            <?php } ?>
+                            <?php if($this->session->userdata('type') == 'Inventory Manager' || $this->session->userdata('type') == 'Admin') { ?>
 							<tr>
 								<td>Inventory Manager</td>
 								<td>
@@ -68,6 +71,8 @@
 									</ul>
 								</td>
 							</tr>
+                            <?php } ?>
+                            <?php if($this->session->userdata('type') == 'Accountant' || $this->session->userdata('type') == 'Admin') { ?>
 							<tr>
 								<td>Accountant</td>
 								<td>
@@ -91,6 +96,8 @@
 									</ul>
 								</td>
 							</tr>
+                            <?php } ?>
+                            <?php if($this->session->userdata('type') == 'Logistic Manager' || $this->session->userdata('type') == 'Admin') { ?>
 							<tr>
 								<td>Logistic Manager</td>
 								<td>
@@ -112,11 +119,12 @@
 									</ul>
 								</td>
 							</tr>
+                            <?php } ?>
+                            <?php if($this->session->userdata('type') == 'Sales Person' || $this->session->userdata('type') == 'Admin') { ?>
 							<tr>
 								<td>Sales Person</td>
 								<td>
 									<ul>
-                                        <li>Dashboard</li>
 										<li>Inventory</li>
 										<li>Purchase</li>
 										<li>Invoice</li>
@@ -134,6 +142,7 @@
 									</ul>
 								</td>
 							</tr>
+                            <?php } ?>
 							</tbody>
 						</table>
 					</div>

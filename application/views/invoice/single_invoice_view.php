@@ -41,7 +41,7 @@
                             <div class="col-md-3">
                                 <address >
                                     <strong>Customer Address</strong><br/>
-                                    <span style="font-size: 26px;"><?php echo $invoice[0]->first_name. ' '.$invoice[0]->last_name; ?></span><br>
+                                    <span><?php echo $invoice[0]->first_name. ' '.$invoice[0]->last_name; ?></span><br>
                                     <?php echo $invoice[0]->street_one; ?><br>
                                     <?php echo $invoice[0]->street_two; ?><br>
                                     <?php echo $invoice[0]->customer_city; ?><br>

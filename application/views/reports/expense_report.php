@@ -52,7 +52,7 @@
 											</tr>
 										<?php } } ?>
 									<tr class="bg-gray-active">
-										<td colspan="3" class="text-right"><strong>Total Income</strong></td>
+										<td colspan="3" class="text-right"><strong>Total Expenses</strong></td>
 										<td class="text-right"><strong>Rs.<?php if($total) { echo number_format($total[0]->sum, 2); } ?></strong></td>
 									</tr>
 									</tbody>
