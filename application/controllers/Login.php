@@ -71,12 +71,15 @@ class Login extends CI_Controller {
 
 		// otp and signup form values pass to model
 		$result = $this->UsersModel->signup($otp, $signup_user);
+        $company = $this->CompanyModel->view();
 
 		// signup successfull redirect to home page
 		if($result == true) {
 			$this->session->set_userdata('name', $result->first_name.' '.$result->last_name);
 			$this->session->set_userdata('id', $result->id);
 			$this->session->set_userdata('type', $result->user_type);
+            $this->session->set_userdata('email', $result->email);
+            $this->session->set_userdata('logo', $company[0]->logo);
 			redirect('home');
 		}
 		// sigup unsuccessfull redirect popup error message

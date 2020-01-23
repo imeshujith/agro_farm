@@ -118,7 +118,7 @@ Class UsersModel extends CI_Model {
     }
 
      public function reset_user($email) {
-		 $query = $this->db->get_where('users', array('email' => $email));
+		 $query = $this->db->get_where('users', array('email' => $email, 'active' => 1));
 		 if($query->result()) {
 		     return $query->result();
          }
