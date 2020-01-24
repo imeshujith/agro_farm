@@ -24,7 +24,6 @@ Class DeliveryOrderModel extends CI_Model {
 		$this->db->select("delivery_order.*, customers.first_name as first_name, customers.last_name as last_name, customers.street_one as street_one, customers.street_two as street_two, customers.city as customer_city, customers.country as customer_country, customers.email as customer_email, customers.phone as customer_phone");
 		$this->db->from('delivery_order');
 		$this->db->join('customers', 'customers.id = delivery_order.customers_id');
-//		$this->db->join('delivery_persons', 'delivery_persons.id = delivery_order.delivery_persons_id');
 		$this->db->where('delivery_order.id', $order_id);
 		$query = $this->db->get();
 		return $query->result();
