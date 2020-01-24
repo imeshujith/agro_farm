@@ -391,6 +391,7 @@
                     $('#update_street_one').val(response[0]['street_one']);
                     $('#update_street_two').val(response[0]['street_two']);
                     $('#update_city').val(response[0]['city']).change();
+                    $('#update_postal_code').val(response[0]['postal_code']);
                     $('#update_phone').val(response[0]['phone']);
                     $('#update_email').val(response[0]['email']);
                     $('#update_supplier_modal').modal('show');
@@ -468,7 +469,7 @@
 		}
 		set_post_code();
 
-		$('#update_supplier_city').change(function() {
+		$('#update_city').change(function() {
 			let city = $(this).val();
 			$.ajax({
 				type: 'get',
