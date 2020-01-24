@@ -130,6 +130,11 @@ class Products extends CI_Controller {
 		$result = $this->ProductsModel->update($product_id, $new_qty);
 
 		if($result) {
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Product quantity updated successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
 			redirect('products/stock?cat_id='.$cat_id);
 		}
 	}

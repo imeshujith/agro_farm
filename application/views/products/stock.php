@@ -1,4 +1,26 @@
 <div class="content-wrapper">
+    <!--alert message-->
+    <?php if($this->session->flashdata('alert')) { ?>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.notify({
+                        message: '<?php echo $this->session->flashdata('alert')['message']?>'
+                    },
+                    {
+                        type: '<?php echo $this->session->flashdata('alert')['type']?>',
+                        placement: {
+                            from: "bottom",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated fadeInDown',
+                            exit: 'animated fadeOutUp'
+                        },
+                    });
+            });
+        </script>
+    <?php } ?>
+
 	<section class="content">
 		<div class="row">
 			<div class="col-xs-12">
@@ -56,7 +78,7 @@
 										</div>
 									</td>
 									<td class="text-center" width="10%">
-                                        <?php if($this->session->userdata('type') != 'Sales Person') { ?><button class="btn btn-default btn-sm" id="update_stock_button" data-id="<?php echo $product->id; ?>">Update Qty</button><?php } ?>
+                                        <?php if($this->session->userdata('type') != 'Sales Person') { ?><button class="btn  btn-primary btn-sm" id="update_stock_button" data-id="<?php echo $product->id; ?>">Update Qty</button><?php } ?>
 									</td>
 								</tr>
 							<?php } ?>
@@ -122,7 +144,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel </button>
-                                    <button type="submit" class="btn btn-primary"> Update </button>
+                                    <button type="submit" class="btn btn-success"> Update </button>
                                     </form>
                                 </div>
                             </div>

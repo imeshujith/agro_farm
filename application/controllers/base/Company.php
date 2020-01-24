@@ -21,24 +21,25 @@ class Company extends CI_Controller {
         $this->load->model('CompanyModel');
     }
 
-    // load header, inventory view and footer pages
+   // index function default controller function
    public function index() {
 
-        // get cities and countries
+        // get cities, countries and existing company details
         $data = array(
             'cities' => $this->CitiesModel->view(),
             'countries' => $this->CountriesModel->view(),
             'company_details' => $this->CompanyModel->view(),
         );
 
-        // set company logo to session
-        if($data['company_details']) {
-            $this->session->set_userdata('logo', $data['company_details'][0]->logo);
-        }
-
+       // set company logo to header
        $header = array(
            'company'	 => $this->CompanyModel->view(),
        );
+
+        // when update company logo it set to the session
+        if($data['company_details']) {
+            $this->session->set_userdata('logo', $data['company_details'][0]->logo);
+        }
 
         $this->load->view('header', $header);
         $this->load->view('base/company', $data);
@@ -61,6 +62,7 @@ class Company extends CI_Controller {
         $this->upload->do_upload('company_logo');
         $image_data = $this->upload->data();
 
+        // get company details through form
         $company = array(
             'name' => $this->input->post('company_name'),
             'street' => $this->input->post('company_street'),
@@ -71,20 +73,32 @@ class Company extends CI_Controller {
             'email' => $this->input->post('company_email'),
         );
 
+        // if company image change set it into the $company array
         if($image_data['file_name']) {
             $company['logo'] = $image_data['file_name'];
         }
 
+        // insert company details
         $result = $this->CompanyModel->create($company);
 
-        // update company logo session data
-        $this->session->set_userdata('logo', $image_data['file_name']);
+        if($result) {
+            // add new logo to the session
+            $this->session->set_userdata('logo', $image_data['file_name']);
 
-		$alert = array(
-			'type' => 'warning',
-			'message' => 'Company information updated successful',
-		);
-		$this->session->set_flashdata('alert', $alert);
-        redirect('base/company');
+            $alert = array(
+                'type' => 'warning',
+                'message' => 'Company information updated successful',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('base/company');
+        }
+        else {
+            $alert = array(
+                'type' => 'danger',
+                'message' => 'Company information updated failed',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('base/company');
+        }
     }
 }

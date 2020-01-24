@@ -73,7 +73,7 @@ class Login extends CI_Controller {
 		$result = $this->UsersModel->signup($otp, $signup_user);
         $company = $this->CompanyModel->view();
 
-		// signup successfull redirect to home page
+		// signup successful redirect to home page
 		if($result == true) {
 			$this->session->set_userdata('name', $result->first_name.' '.$result->last_name);
 			$this->session->set_userdata('id', $result->id);
@@ -82,7 +82,7 @@ class Login extends CI_Controller {
             $this->session->set_userdata('logo', $company[0]->logo);
 			redirect('home');
 		}
-		// sigup unsuccessfull redirect popup error message
+		// signup unsuccessful redirect popup error message
 		else {
             $this->session->set_flashdata('incorrect_otp', true);
             redirect('login/signup');
@@ -123,7 +123,7 @@ class Login extends CI_Controller {
 			$this->email->message('
                 <p>Dear '.$result[0]->first_name.' '.$result[0]->last_name.',</p>
 
-                <p>You have been requested to reset your "AgroFarm Management System" password in order to get reset to your password click on the following link and enter your OTC code.</p>
+                <p>You have been requested to reset your "AgroFarm Management System" password in order to get reset to your password click on the following link and enter your OTP code.</p>
 
                 <p>Code : '.$result[0]->token.'</p>
                 <p>Link: <a href="'.base_url().'login/signup?email='.$result[0]->email.'">Reset Password Link</a> <br/>

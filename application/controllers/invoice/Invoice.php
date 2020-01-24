@@ -171,7 +171,7 @@ class Invoice extends CI_Controller {
 			$current_quantity = $product[0]->quantity;
 			$ordered_quantity = $line->quantity;
 
-			// update each delivery order line quantity
+			// update each product qty
 			if(($current_quantity - $ordered_quantity) > 0) {
 				$new_quantity = array(
 					'quantity' => ($current_quantity - $ordered_quantity),

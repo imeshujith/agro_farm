@@ -54,7 +54,7 @@
                             foreach ($customers as $customer) { ?>
                                 <tr>
                                     <td><?php echo "CUS".$customer->id; ?></td>
-                                    <td><?php echo $customer->first_name." ". $customer->last_name; ?></td>
+                                    <td><?php echo $customer->first_name." "; if($customer->customer_type == 'person') { echo $customer->last_name; } ?></td>
                                     <td>
                                         <?php
                                         echo $customer->street_one.", ".$customer->street_two.", ".$customer->city."<br/>";

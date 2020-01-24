@@ -83,8 +83,8 @@ class Users extends CI_Controller {
             <p>Dear '.$new_user['first_name'].' '.$new_user['last_name'].',</p>
 
             <p>You have been invited to connect to "Bio Green Holdings (Pvt) Ltd" in order to get access to our AgroFarm Management System.</p>
-            <p>OTC Code : '.$new_user['token'].'</p>
-            <p>To accept the invitation, click on the following link <a href="'.base_url().'login/signup?email='.$new_user['email'].'"><strong>Invitation Link</strong></a> and enter your email and OTC code</p>
+            <p>OTP Code : '.$new_user['token'].'</p>
+            <p>To accept the invitation, click on the following link <a href="'.base_url().'login/signup?email='.$new_user['email'].'"><strong>Invitation Link</strong></a> and enter your email and OTP code</p>
             <p>Accept invitation to "Bio Green Holdings (Pvt) Ltd"</p> <br/>
 
             <p>Best regards,</p>

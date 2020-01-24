@@ -100,7 +100,7 @@ Class DeliveryOrderModel extends CI_Model {
 		$this->db->where('id', $order_id);
 		$this->db->update('delivery_order', array('status' => 'Cancel'));
 
-		$$this->db->select("delivery_order.*, customers.first_name as first_name, customers.last_name as last_name, customers.email as email, delivery_persons.name as person");
+		$this->db->select("delivery_order.*, customers.first_name as first_name, customers.last_name as last_name, customers.email as email, delivery_persons.name as person");
 		$this->db->from('delivery_order');
 		$this->db->join('customers', 'customers.id = delivery_order.customers_id');
 		$this->db->join('delivery_persons', 'delivery_persons.id = delivery_order.delivery_persons_id');

@@ -21,6 +21,7 @@ class Customer extends CI_Controller {
         $this->load->model('CompanyModel');
     }
 
+    // customer controller default function
     public function index() {
         // get cities and countries
         $data = array(
@@ -29,6 +30,7 @@ class Customer extends CI_Controller {
             'customers' => $this->CustomerModel->view(),
         );
 
+        // set company logo to header
         $header = array(
             'company'	 => $this->CompanyModel->view(),
         );
@@ -38,7 +40,10 @@ class Customer extends CI_Controller {
         $this->load->view('footer');
     }
 
+    // customer create function
     public function create_customer() {
+
+        // new customer details array
 		$new_customer = array(
 		    'customer_type' => $this->input->post('customer_type'),
 			'first_name' => $this->input->post('first_name'),
@@ -56,8 +61,10 @@ class Customer extends CI_Controller {
 		    $new_customer['last_name'] = $this->input->post('last_name');
         }
 
+		// send new customer details to customer model
 		$result = $this->CustomerModel->create($new_customer);
 
+		// if data insert success redirect to the customer view
 		if($result) {
 			$alert = array(
 				'type' => 'success',
@@ -66,8 +73,17 @@ class Customer extends CI_Controller {
 			$this->session->set_flashdata('alert', $alert);
 			redirect('customers/customer');
 		}
+		else {
+            $alert = array(
+                'type' => 'danger',
+                'message' => 'New customer created failed',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('customers/customer');
+        }
     }
 
+    // get specific customer from database
 	public function get_single_item() {
 		$customer_id = $this->input->post('id');
 
@@ -77,9 +93,12 @@ class Customer extends CI_Controller {
 		}
 	}
 
+	// update customer function
     public function update_customer() {
+        // update customer id
     	$customer_id = $this->input->post('id');
 
+    	// updated values set to the $new_values array
 		$new_values = array(
             'customer_type' => $this->input->post('customer_type'),
 			'first_name' => $this->input->post('first_name'),
@@ -96,8 +115,10 @@ class Customer extends CI_Controller {
             $new_values['last_name'] = $this->input->post('last_name');
         }
 
+        // updates values send to the model
 		$result = $this->CustomerModel->update($customer_id, $new_values);
 
+        // update success redirect to the customer view
 		if($result) {
 			$alert = array(
 				'type' => 'warning',
@@ -106,13 +127,25 @@ class Customer extends CI_Controller {
 			$this->session->set_flashdata('alert', $alert);
 			redirect('customers/customer');
 		}
+		else{
+            $alert = array(
+                'type' => 'danger',
+                'message' => 'Customer information updated failed',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('customers/customer');
+        }
 	}
 
+	// customer delete function
 	public function delete_customer() {
+        // get delete customer id
 		$customer_id = $this->input->post('id');
 
+		// send delete id to customer model
 		$result = $this->CustomerModel->delete($customer_id);
 
+		// deleted successful redirect to the customer view
 		if($result) {
 			$alert = array(
 				'type' => 'warning',
@@ -121,8 +154,17 @@ class Customer extends CI_Controller {
 			$this->session->set_flashdata('alert', $alert);
 			redirect('customers/customer');
 		}
+		else {
+            $alert = array(
+                'type' => 'danger',
+                'message' => 'Customer deleted failed',
+            );
+            $this->session->set_flashdata('alert', $alert);
+            redirect('customers/customer');
+        }
 	}
 
+	// get postal code for specific city
 	public function get_postal_code() {
     	$city = $this->input->get('city');
 		$result = $this->CustomerModel->postal_code($city);

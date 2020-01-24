@@ -251,14 +251,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Phone</label>
-                                            <input type="text" class="form-control" name="update_phone" pattern="[0-9]{9,10}">
+                                            <input type="text" class="form-control" name="update_phone" id="update_phone" pattern="[0-9]{9,10}">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="email" class="form-control"root name="update_email">
+                                            <input type="email" class="form-control" name="update_email" id="update_email">
                                         </div>
                                     </div>
                                 </div>
@@ -330,7 +330,7 @@
 							foreach ($suppliers as $supplier) { ?>
 								<tr>
 									<td><?php echo "SUP".$supplier->id; ?></td>
-									<td><?php echo $supplier->first_name." ". $supplier->last_name; ?></td>
+									<td><?php echo $supplier->first_name." "; if($supplier->supplier_type == 'person') { echo $supplier->last_name; }?></td>
 									<td>
 										<?php
 										echo $supplier->street_one.", ".$supplier->street_two.", ".$supplier->city."<br/>";
