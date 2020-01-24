@@ -31,7 +31,7 @@
 													<option selected disabled>Select Customer</option>
 													<?php
 													foreach ($customers as $customer) {
-														echo '<option value="'.$customer->id.'">CUS'.$customer->id.'- '.$customer->first_name.' '.$customer->last_name.'</option>';
+														echo '<option value="'.$customer->id.'">'.$customer->first_name.' '.$customer->last_name.' - CUS'.$customer->id.'</option>';
 													}
 													?>
 												</select>

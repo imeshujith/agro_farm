@@ -24,7 +24,7 @@
                             </thead>
                             <tbody>
 							<?php foreach ($orders as $order) { ?>
-								<tr style="cursor:pointer;" data-href="<?php echo base_url(); ?>delivery/delivery/single_delivery_order?id=<?php echo $order->id; ?>" class="clickable-row">
+								<tr style="cursor:pointer;" data-href="<?php echo base_url(); ?>delivery/delivery/single_delivery_order?id=<?php echo $order->id; ?>" class="clickable-row <?php if($order->status == 'Cancel') { echo 'bg-danger text-danger';} elseif($order->status == 'Draft') { echo 'bg-warning text-warning';} ?>">
 									<td><?php echo $order->number.' '.$order->id; ?></td>
 									<td><?php echo $order->first_name.' '.$order->last_name; ?></td>
 									<td><?php echo  $order->customer_city; ?></td>

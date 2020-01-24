@@ -31,7 +31,7 @@
 													<option selected disabled>Select Supplier</option>
 													<?php
 													foreach ($suppliers as $supplier) {
-														echo '<option value="'.$supplier->id.'">SUP'.$supplier->id.'- '.$supplier->first_name.' '.$supplier->last_name.'</option>';
+														echo '<option value="'.$supplier->id.'">'.$supplier->first_name.' '.$supplier->last_name.' - SUP'.$supplier->id.'</option>';
 													}
 													?>
 												</select>

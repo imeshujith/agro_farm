@@ -135,7 +135,7 @@ class Login extends CI_Controller {
             $this->session->set_flashdata('correct_email', true);
 		}
 
-		elseif ($result == false) {
+		elseif (!$result) {
             $this->session->set_flashdata('incorrect_email', true);
         }
 	}
