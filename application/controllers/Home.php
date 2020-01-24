@@ -59,6 +59,6 @@ class Home extends CI_Controller {
 
     public function current_income() {
 		$this_month_incomes = $this->DashboardModel->current_month_income();
-		echo json_encode($this_month_incomes);
+		echo json_encode($this_month_incomes); // return json array
 	}
 }
