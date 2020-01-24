@@ -34,7 +34,7 @@ class Home extends CI_Controller {
 		}
 
 		if ($chart_data) {
-            $chart_data = (preg_replace('/"([^"]+)"\s*:\s*/', '$1:', json_encode($chart_data)));
+            $chart_data = (preg_replace('/"([^"]+)"\s*:\s*/', '$1:', json_encode($chart_data))); // randomly generate colors
         }
 
     	$data = array(
