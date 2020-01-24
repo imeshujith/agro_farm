@@ -477,7 +477,7 @@
 				dataType: 'json',
 				data: {'city': city},
 				success: function (response) {
-					$('#update_supplier_postal_code').val(response[0]['postcode']);
+					$('#update_postal_code').val(response[0]['postcode']);
 				},
 			});
 		});
