@@ -98,7 +98,6 @@ class Login extends CI_Controller {
 	}
 
 	public function forgot_password() {
-
 		$email = $this->input->post('email');
 
 		// check entered email address is system user
@@ -136,10 +135,12 @@ class Login extends CI_Controller {
                 ');
 			$this->email->send();
             $this->session->set_flashdata('correct_email', true);
+            redirect('login/load_forgot_password');
 		}
 
 		else {
             $this->session->set_flashdata('incorrect_email', true);
+			redirect('login/load_forgot_password');
         }
 	}
 
