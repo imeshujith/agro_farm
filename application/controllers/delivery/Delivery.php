@@ -21,17 +21,10 @@ class Delivery extends CI_Controller {
 		$order_id = $this->input->get('id');
 
 		$data = array(
+			'order' => $this->DeliveryOrderModel->get_do($order_id),
 			'order_lines' => $this->DeliveryOrderModel->get_do_lines($order_id),
 			'persons'  => $this->DeliveryPersonsModel->active_persons(),
 		);
-
-		$do = $this->DeliveryOrderModel->get_do($order_id);
-		if($do) {
-			$data['order'] = $this->DeliveryOrderModel->get_do_with_person($order_id);
-		}
-		else {
-			$data['order'] = $this->DeliveryOrderModel->get_do($order_id);
-		}
 
         $header = array(
             'company'	 => $this->CompanyModel->view(),
