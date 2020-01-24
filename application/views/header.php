@@ -114,6 +114,20 @@
                     </a>
                 </li>
 
+				<?php if($this->session->userdata('type') == 'Admin' || $this->session->userdata('type') ==  'Accountant' || $this->session->userdata('type') ==  'Sales Person') { ?>
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-money"></i> &nbsp;&nbsp;<span>Invoices</span>
+							<span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+							<ul class="treeview-menu">
+								<li><a href="<?php echo base_url(); ?>invoice/invoice"><i class="fa fa-angle-right"></i> Create Invoice</a></li>
+								<li><a href="<?php echo base_url(); ?>invoice/invoice/all_invoices"><i class="fa fa-angle-right"></i> View Invoices</a></li>
+							</ul>
+						</a>
+					</li>
+				<?php } ?>
 
                 <?php if($this->session->userdata('type') != 'Logistic Manager') { ?>
                     <li class="treeview">
@@ -125,21 +139,6 @@
                             <ul class="treeview-menu">
                                 <li><a href="<?php echo base_url(); ?>purchase/purchase"><i class="fa fa-angle-right"></i> Create PO</a></li>
                                 <li><a href="<?php echo base_url(); ?>purchase/purchase/view_purchase_orders"><i class="fa fa-angle-right"></i> View PO</a></li>
-                            </ul>
-                        </a>
-                    </li>
-                <?php } ?>
-
-                <?php if($this->session->userdata('type') == 'Admin' || $this->session->userdata('type') ==  'Accountant' || $this->session->userdata('type') ==  'Sales Person') { ?>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-money"></i> &nbsp;&nbsp;<span>Invoices</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                            <ul class="treeview-menu">
-                                <li><a href="<?php echo base_url(); ?>invoice/invoice"><i class="fa fa-angle-right"></i> Create Invoice</a></li>
-                                <li><a href="<?php echo base_url(); ?>invoice/invoice/all_invoices"><i class="fa fa-angle-right"></i> View Invoices</a></li>
                             </ul>
                         </a>
                     </li>
