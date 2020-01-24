@@ -251,14 +251,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Phone</label>
-                                            <input type="text" class="form-control" name="update_phone" id="update_phone" pattern="[0-9]{9,10}">
+                                            <input type="text" class="form-control" name="phone" id="update_phone" pattern="[0-9]{9,10}">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="update_email" id="update_email">
+                                            <input type="email" class="form-control" name="email" id="update_email">
                                         </div>
                                     </div>
                                 </div>
@@ -391,6 +391,7 @@
                     $('#update_street_one').val(response[0]['street_one']);
                     $('#update_street_two').val(response[0]['street_two']);
                     $('#update_city').val(response[0]['city']).change();
+                    $('#update_postal_code').val(response[0]['city']).change();
                     $('#update_phone').val(response[0]['phone']);
                     $('#update_email').val(response[0]['email']);
                     $('#update_supplier_modal').modal('show');
