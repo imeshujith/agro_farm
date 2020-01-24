@@ -391,7 +391,6 @@
                     $('#update_street_one').val(response[0]['street_one']);
                     $('#update_street_two').val(response[0]['street_two']);
                     $('#update_city').val(response[0]['city']).change();
-                    $('#update_postal_code').val(response[0]['city']).change();
                     $('#update_phone').val(response[0]['phone']);
                     $('#update_email').val(response[0]['email']);
                     $('#update_supplier_modal').modal('show');
@@ -462,7 +461,7 @@
 				data: {'city': city},
 				success: function (response) {
 					if(response[0]) {
-						$('#update_supplier_postal_code').val(response[0]['postcode']);
+						$('#update_postal_code').val(response[0]['postcode']);
 					}
 				},
 			});
