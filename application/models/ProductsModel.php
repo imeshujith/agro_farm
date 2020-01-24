@@ -16,6 +16,7 @@ Class ProductsModel extends CI_Model {
 		$this->db->join('product_category', 'product_category.id = product.product_category_id');
 		$this->db->join('unit_of_measures', 'unit_of_measures.id = product.unit_of_measures_id');
 		$this->db->where('product.active', 1);
+		$this->db->order_by('product.name', 'ASD');
 		$query = $this->db->get();
 		return $query->result();
 	}

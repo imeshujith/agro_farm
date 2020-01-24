@@ -30,10 +30,9 @@
 												<select class="form-control" name="invoice_customer" data-validation="required">
 													<option selected disabled>Select Customer</option>
 													<?php
-													foreach ($customers as $customer) {
-														echo '<option value="'.$customer->id.'">'.$customer->first_name.' '.$customer->last_name.' - CUS'.$customer->id.'</option>';
-													}
-													?>
+													foreach ($customers as $customer) { ?>
+														<option value="<?php echo $customer->id; ?>"><?php echo $customer->first_name; if($customer->customer_type == 'person') { echo $customer->last_name; } echo ' - CUS'.$customer->id; ?></option>
+													<?php } ?>
 												</select>
 											</div>
 										</div>
@@ -72,9 +71,9 @@
 										<th>Unit Price</th>
 										<th>Quantity</th>
 										<th>UoM</th>
-										<th>Discount</th>
-										<th>Tax</th>
-										<th>Subtotal</th>
+										<th>Discount(Rs)</th>
+										<th>Tax(%)</th>
+										<th>Subtotal(Qty*UP - Dis)</th>
 										<th class="text-center" width="2%"><button type="button" class="btn btn-success btn-xs" id="add_invoice_line"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
 										</thead>
 										<tbody id="invoice_lines">
@@ -87,7 +86,7 @@
 									<table class="table table-bordered" id="tab_logic_total">
 										<tbody>
 										<tr>
-											<th class="text-right">Amount Rs.</th>
+											<th class="text-right">Amount(Qty * UP) Rs.</th>
 											<td class="text-left"><input type="text" name='invoice_total_amount' id="invoice_total_amount" placeholder='0.00' class="form-control" readonly/></td>
 										</tr>
 										<tr>

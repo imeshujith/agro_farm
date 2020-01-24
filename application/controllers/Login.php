@@ -89,12 +89,15 @@ class Login extends CI_Controller {
 		}
 	}
 
-	public function forgot_password() {
+	public function load_forgot_password() {
 		// load forget_password view
-        $data = array(
-            'company'	 => $this->CompanyModel->view(),
-        );
+		$data = array(
+			'company'	 => $this->CompanyModel->view(),
+		);
 		$this->load->view('forgot_password', $data);
+	}
+
+	public function forgot_password() {
 
 		$email = $this->input->post('email');
 
@@ -135,7 +138,7 @@ class Login extends CI_Controller {
             $this->session->set_flashdata('correct_email', true);
 		}
 
-		elseif (!$result) {
+		else {
             $this->session->set_flashdata('incorrect_email', true);
         }
 	}

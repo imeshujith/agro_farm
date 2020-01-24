@@ -30,10 +30,9 @@
 												<select class="form-control" name="supplier_name" data-validation="required">
 													<option selected disabled>Select Supplier</option>
 													<?php
-													foreach ($suppliers as $supplier) {
-														echo '<option value="'.$supplier->id.'">'.$supplier->first_name.' '.$supplier->last_name.' - SUP'.$supplier->id.'</option>';
-													}
-													?>
+													foreach ($suppliers as $supplier) { ?>
+														<option value="<?php echo $supplier->id; ?>"><?php echo $supplier->first_name; if($supplier->supplier_type == 'person') { echo $supplier->last_name; } echo ' - SUP'.$supplier->id; ?></option>
+													<?php } ?>
 												</select>
 											</div>
 										</div>

@@ -50,7 +50,7 @@
 						</div>
 						<input type="submit" class="btn btn-custom btn-lg btn-block" value="Login">
 					</form>
-					<a href="<?php echo base_url(); ?>login/forgot_password" class="forget">Forgot your password?</a>
+					<a href="<?php echo base_url(); ?>login/load_forgot_password" class="forget">Forgot your password?</a>
 
 					<footer id="footer">
 						<p>Powered by AgroFarm © - <?php echo date('Y'); ?></p>
