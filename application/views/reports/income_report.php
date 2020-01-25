@@ -47,7 +47,7 @@
 										<?php foreach ($invoices as $invoice) { ?>
 											<tr>
 												<td><?php echo $invoice->number.$invoice->id; ?></td>
-												<td><?php echo $invoice->first_name.' '.$invoice->last_name; ?></td> // add new customer column
+												<td><?php echo $invoice->first_name.' '.$invoice->last_name; ?></td> <!--add new customer column-->
 												<td><?php echo $invoice->payment_type; ?></td>
 												<td><?php echo $invoice->date; ?></td>
 												<td class="text-right"><?php echo number_format($invoice->total_amount, 2); ?></td>
