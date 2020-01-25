@@ -172,22 +172,44 @@
 			var price;
 			var uom_id;
 			var uom;
-			$.ajax({
-				type: 'post',
-				url: base_url + 'products/products/view_single_product',
-				async: false,
-				dataType: 'json',
-				data: {id: id},
-				success: function (response) {
-					price = response[0]['price'];
-					uom_id = response[0]['unit_of_measures_id'];
-					uom = response[0]['uom'];
-				},
-			});
+
+            $.ajax({
+                type: 'post',
+                url: base_url + 'products/products/view_single_product',
+                async: false,
+                dataType: 'json',
+                data: {id: id},
+                success: function (response) {
+                    price = response[0]['price'];
+                    uom_id = response[0]['unit_of_measures_id'];
+                    uom = response[0]['uom'];
+                },
+            });
+
 			$(this).closest("tr").find('#invoice_price').val(price);
 			$(this).closest("tr").find('#invoice_uom_id').val(uom_id);
 			$(this).closest("tr").find('#invoice_uom').val(uom);
 		});
+
+        $('#invoice_lines').on('keyup', '#invoice_qty', function () {
+            var product_id = $(this).closest("tr").find('#invoice_product').val();
+            var line_quantity = $(this).closest("tr").find('#invoice_qty').val();
+
+            // aluthen ajax function ekak damma producteke quantity eka change weddi data base eken danata thiyena quantity ara aran
+            // eka ita wada wadi nam error ekak penanwa
+            $.ajax({
+                type: 'post',
+                url: base_url + 'products/products/view_single_product',
+                async: false,
+                dataType: 'json',
+                data: {id: product_id},
+                success: function (response) {
+                    if (parseInt(line_quantity) > parseInt(response[0]['quantity'])) {
+                        alert('Your ordered quantity greater than current stock quantity');
+                    }
+                },
+            });
+        });
 
 
 		$('#invoice_lines').on('change paste keyup', '#invoice_price, #invoice_qty, #invoice_discount', function () {
