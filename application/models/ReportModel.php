@@ -9,6 +9,7 @@ Class ReportModel extends CI_Model {
 			->where('invoice.date >=', $from_date)
 			->where('invoice.date <=', $to_date)
 			->where('invoice.status !=', 'Cancel')
+			->where('invoice.total_amount > 5000') // add new condition total_amount > 5000
 			->order_by('date', 'ASC')
 			->get()
 			->result();
