@@ -21,6 +21,7 @@ Class ReportModel extends CI_Model {
 			->from('invoice')
 			->where('date >=', $from_date)
 			->where('date <=', $to_date)
+            ->where('invoice.total_amount > 5000')
 			->get()
 			->result();
 	}
