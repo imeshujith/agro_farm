@@ -47,16 +47,16 @@
 										<?php foreach ($invoices as $invoice) { ?>
 											<tr>
 												<td><?php echo $invoice->number.$invoice->id; ?></td>
-												<td><?php echo $invoice->first_name.' '.$invoice->last_name; ?></td> <!--add new customer column-->
+												<td><?php echo $invoice->first_name.' '.$invoice->last_name; ?></td> <!--aluthin customer name eka damma-->
 												<td><?php echo $invoice->payment_type; ?></td>
 												<td><?php echo $invoice->date; ?></td>
-												<td class="text-right"><?php echo number_format($invoice->total_amount, 2); ?></td>
+												<td class="text-right"><?php echo number_format($invoice->total_amount, 0); ?></td>
 											</tr>
 										<?php } } ?>
 									</tbody>
 									<tr class="bg-gray-active">
 										<td colspan="4" class="text-right"><strong>Total Income</strong></td>
-										<td class="text-right"><strong>Rs.<?php if($sum) { echo number_format($sum[0]->sum, 2); } ?></strong></td>
+										<td class="text-right"><strong>Rs.<?php if($sum) { echo number_format($sum[0]->sum, 0); } ?></strong></td>
 									</tr>
 								</table>
 							</div>
