@@ -36,7 +36,7 @@
 									<thead>
 									<tr class="bg-black-gradient">
 										<th>Invoice Number</th>
-										<th>Customer Number</th>
+										<th>Customer Name</th>
 										<th>Payment Type</th>
 										<th>Date</th>
 										<th class="text-right">Total</th>
