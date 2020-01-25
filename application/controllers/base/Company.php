@@ -81,6 +81,7 @@ class Company extends CI_Controller {
         // insert company details
         $result = $this->CompanyModel->create($company);
 
+        // update successful redirect to company view
         if($result) {
             // add new logo to the session
             $this->session->set_userdata('logo', $image_data['file_name']);
