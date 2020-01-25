@@ -17,11 +17,13 @@ Class ReportModel extends CI_Model {
 
 	// income total report query
 	public function income_report_sum($from_date, $to_date) {
-		return $this->db->select('sum(total_amount) as sum')
+		return $this->db->select('sum(invoice.total_amount) as sum')
 			->from('invoice')
-			->where('date >=', $from_date)
-			->where('date <=', $to_date)
-            ->where('invoice.total_amount > 5000') // invoice eke sum eka ganne  5000ta wadi ewa witharai
+			->join('customers', 'customers.id = invoice.customers_id')
+			->where('invoice.date >=', $from_date)
+			->where('invoice.date <=', $to_date)
+			->where('invoice.status !=', 'Cancel')
+			->where('invoice.total_amount > 5000') // invoice eke sum eka ganne  5000ta wadi ewa witharai
 			->get()
 			->result();
 	}
